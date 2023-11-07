@@ -7,26 +7,54 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/View.styles.css" asp-append-version="true" />
+    <style>
+        [class^="topzone-"], [class*="topzone-"] {
+            background-image: url(https://cdn.tgdd.vn/mwgcart/topzone/images/icon-topzone.webp);
+            background-repeat: no-repeat;
+            display: inline-block;
+            height: 35px;
+            width: 103px;
+            line-height: 30px;
+            vertical-align: middle;
+            background-size: 514px 226px;
+        }
+
+        .topzone-autho {
+            background-image: url(https://cdn.tgdd.vn/mwgcart/topzone/images/APR_logo.webp);
+            width: 32px;
+            height: 40px;
+            background-size: 100%;
+        }
+
+        .nav-link:hover {
+            background: #2d2d2d;
+        }
+
+    </style>
 </head>
-<body>
+<body style="background: #3e3e3f; color: #fff;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">View</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3 bg-black py-0">
+            <div class="container-fluid container">
+                <div class="logo-topzone me-5">
+                    <a class="me-3" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="topzone-logo"></i>
+                    </a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="topzone-autho"></i>
+                    </a>
                 </div>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-4 px-4" asp-area="" asp-controller="Home" asp-action="Index">IPhone</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-4 px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Đồng hồ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-4 px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Phụ kiện</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -36,9 +64,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted">
         <div class="container">
-            &copy; 2023 - View - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+           
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
