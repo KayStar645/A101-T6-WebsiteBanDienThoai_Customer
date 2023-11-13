@@ -1,0 +1,396 @@
+﻿#content {
+    background: #3e3e3f;
+    min-height: 100vh;
+}
+
+.product__container {
+    padding-bottom: 50px;
+}
+
+.product__detail {
+    color: #fff;
+    font-size: 1.6rem;
+    padding: 0 40px;
+}
+
+.product__detail::-webkit-scrollbar {
+    width: 0;
+}
+
+.product__name {
+    text-align: left;
+    font-size: 3rem;
+    color: #fff;
+    padding: 0;
+}
+
+h2.product__name {
+    font-size: 2.5rem;
+}
+
+.product__image {
+    position: sticky;
+    top: 110px;
+}
+
+.product__image img {
+    width: 90%;
+    padding: 0 20px;
+    padding-bottom: 60px !important;
+}
+
+.circle-btn.absolute {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.product__memory {
+    padding: 0;
+}
+
+.product__memory li {
+    margin: 0;
+    padding: 0;
+}
+
+.product__memory li a {
+    padding: 8px 12px
+}
+
+.detail__part {
+    padding: 4px 0;
+    overflow: hidden;
+}
+
+.product__detail .title {
+    font-size: 1.8rem;
+    padding: 8px 0;
+    font-weight: 600;
+    color: #fff;
+}
+
+.product__gift ul {
+    padding-left: 20px;
+}
+
+.product__gift li {
+    padding: 2px 0;
+}
+
+.product__parameter table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.product__parameter table tr,
+.product__parameter table tr td {
+    color: #fff;
+    border-bottom: 1.5px solid #6f6e6ed6;
+    padding: 12px 8px;
+}
+
+.product__parameter table td:last-child {
+    text-align: right;
+}
+
+.product__parameter i {
+    color: #947cf2;
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
+.product__parameter table tr:last-child
+.product__parameter table tr:last-child td {
+    border: none;
+}
+
+.product__memory {
+    position: initial;
+    transform: none;
+}
+
+.product__album {
+    margin-top: 24px;
+    flex-wrap: nowrap;
+}
+
+.product__album img {
+    width: 100px;
+    height: 100px;
+    padding: 0 10px;
+}
+
+.dot__list {
+    margin-left: 0;
+    position: initial;
+}
+
+.dot__list .dot__index {
+    height: 100px;
+    width: 100px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.product__buy {
+    position: initial;
+}
+
+.product__buy:active {
+    opacity: 1;
+    outline: none;
+    transform: scale(0.99);
+}
+
+.product__buy button {
+    outline: none;
+}
+
+.product__comment {
+    color: #222b45;
+    padding: 30px;
+}
+
+#comment {
+    width: 60%;
+    margin: 40px auto 100px auto;
+    border: 1.6px solid #ccc;
+    border-radius: 10px;
+}
+
+.comment__container {
+    width: 100%;
+    background: initial;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.comment__list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: #fff;
+    max-height: 400px;
+}
+
+    .comment__list .comment__item {
+        padding-bottom: 24px;
+    }
+
+.comment__list .comment__item i {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #3e3e3f;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 12px;
+}
+
+.content__body {
+    margin-top: 16px;
+}
+
+.content__body:first-child {
+    margin: 0;
+}
+
+.content__body.admin-role {
+    margin-left: 50px;
+}
+
+.comment__item.answer .relationship {
+    position: absolute;
+    content: "";
+    width: 2.2px;
+    height: 50px;
+    background: #ccc;
+    left: 15px;
+    top: 44px;
+    border-radius: 20px;
+}
+
+.comment__item.answer .content__body .admin__image:after {
+    position: absolute;
+    content: "";
+    width: 70%;
+    height: 15px;
+    left: -35px;
+    top: 10px;
+    background: transparent;
+    border-bottom-left-radius: 34px;
+    border: 2.4px solid;
+    border-left-color: #ccc;
+    border-top-color: transparent;
+    border-right-color: transparent;
+}
+
+.content__body img {
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+    .content__body .content {
+        background: #f0f2f5;
+        padding: 8px 12px;
+        border-radius: 20px;
+    }
+
+.content__body .content p {
+    font-size: 1.5rem;
+}
+
+        .content__body .content .user__name {
+            color: #333;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .content__body .content .user__content {
+            padding-top: 2px;
+            color: #333;
+        }
+
+.comment__item .comment__time {
+    margin-left: 12px;
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: #fff;
+    background: #727272;
+    padding: 0 4px;
+    border-radius: 5px;
+}
+
+.comment__list .comment__item:last-child {
+    padding-bottom: 0;
+}
+
+.add-comment {
+    padding-bottom: 24px;
+    border-bottom: 1.6px solid #ccc;
+    margin-bottom: 24px;
+}
+
+.add-comment textarea {
+    width: 100%;
+    border: 1.6px solid #ccc;
+    border-radius: 5px;
+    margin: 12px 0;
+    padding: 8px 12px;
+    min-height: 50px;
+}
+
+    .add-comment input {
+        width: 100%;
+        border-radius: 10px;
+        padding: 6px 12px;
+        border: none;
+        color: #fff;
+        font-size: 1.6rem;
+        background: initial;
+        box-shadow: none;
+    }
+
+    .add-comment button {
+        outline: none;
+        cursor: pointer;
+        width: fit-content;
+        background: #222b45;
+        color: #fff;
+        font-weight: bold;
+        width: 100%;
+        border-radius: 5px;
+        height: 50px;
+    }
+
+.add-comment img {
+    width: 18px;
+}
+
+.account__info {
+    background: #fff;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    width: auto;
+    margin: 0 -8px;
+}
+
+.account__info p {
+    width: 100px;
+    font-weight: bold;
+}
+
+.account__info .info__item {
+    padding: 12px 0;
+}
+
+.content {
+    padding: 0;
+}
+
+.suggest-product .title {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+#support {
+    padding-top: 50px;
+}
+
+#support .carousel-control-next,
+#support .carousel-control-prev {
+    width: fit-content;
+}
+
+#support .product__info {
+    background: initial;
+}
+
+#support .product__name,
+#support .product__price {
+    color: #333;
+    font-size: 1.7rem;
+    white-space: initial;
+}
+
+#support .product__name {
+    height: 55px;
+    text-align: center;
+}
+
+#support .product__info--new img {
+    width: 80%;
+    padding-bottom: 12px;
+}
+
+#support .circle-btn.absolute {
+    left: initial;
+    transform: translate(0, -50%);
+}
+
+.product__comment.not-active .user__account {
+    display: none;
+}
+
+.product__comment.active .user__account {
+    display: block;
+}
+
+.product__comment.not-active .add-comment textarea {
+    margin-bottom: 0;
+}
+
+.product__comment.active .add-comment textarea {
+    margin-bottom: 12px;
+}
+
+.carousel-indicators {
+    position: initial;
+    opacity: 1;
+    margin: 0;
+}
+
+#suggest-list{
+    overflow: hidden;
+}

@@ -1,77 +1,232 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - View</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/View.styles.css" asp-append-version="true" />
-    <style>
-        [class^="topzone-"], [class*="topzone-"] {
-            background-image: url(https://cdn.tgdd.vn/mwgcart/topzone/images/icon-topzone.webp);
-            background-repeat: no-repeat;
-            display: inline-block;
-            height: 35px;
-            width: 103px;
-            line-height: 30px;
-            vertical-align: middle;
-            background-size: 514px 226px;
-        }
-
-        .topzone-autho {
-            background-image: url(https://cdn.tgdd.vn/mwgcart/topzone/images/APR_logo.webp);
-            width: 32px;
-            height: 40px;
-            background-size: 100%;
-        }
-
-        .nav-link:hover {
-            background: #2d2d2d;
-        }
-
-    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link type="image/png" rel="icon" href="~/Assets/Image/Store/136 icon-no-bg.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto+Mono:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500;700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <title>136 Mobile: Buôn bán và sửa chữa điện thoại</title>
+    <link href="~/css/validate.css" rel="stylesheet" />
+    <link href="~/css/base.css" rel="stylesheet" />
+    <link href="~/css/shared.css" rel="stylesheet" />
+    <link href="~/css/m_p.css" rel="stylesheet" />
+    <link href="~/css/main.css" rel="stylesheet" />
+    <link href="~/css/responsive.css" rel="stylesheet" />
+    <script src="~/js/main.js"></script>
+    <script src="~/js/validate.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 </head>
-<body style="background: #3e3e3f; color: #fff;">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3 bg-black py-0">
-            <div class="container-fluid container">
-                <div class="logo-topzone me-5">
-                    <a class="me-3" asp-area="" asp-controller="Home" asp-action="Index">
-                        <i class="topzone-logo"></i>
-                    </a>
-                    <a asp-area="" asp-controller="Home" asp-action="Index">
-                        <i class="topzone-autho"></i>
-                    </a>
-                </div>
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-4 px-4" asp-area="" asp-controller="Home" asp-action="Index">IPhone</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-4 px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Đồng hồ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-4 px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Phụ kiện</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="footer text-muted">
-        <div class="container">
-           
+<style>
+    button {
+        margin: 0;
+    }
+
+    .header__logo img {
+        width: 150px;
+    }
+
+    .user__cart.relative .product__count {
+        position: absolute;
+    }
+
+    center{
+        display: none !important;
+    }
+
+    div:not([class]):not([id]) {
+        display: none !important;
+    }
+
+    .nav__item{
+        cursor: pointer;
+    }
+
+    .category-item{
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div class="forsure">
+        <div id="header" class="wide grid">
+            <div class="layout"></div>
+            <div class="relative h-100">
+                <div class="row ali-center h-100 header__body relative">
+                    <div class="h-2 order2 header__logo">
+                        <div class="">
+                            <p data-link="/Store/Home" data-type="Home" data-can-render="true" class="nav__item active">
+                                <img src="~/image/home/logo.png" />
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="h-8 order1 header__navbar h-100">
+                        <div class="">
+                            <div class="h-0 m-0 l-0 s-2">
+                                <i class="fa-solid fa-bars"></i>
+                            </div>
+
+                            <div class="s-0 row ali-center jus-center w-100">
+                                <div class="">
+                                    <p data-link="/Store/Phone" data-type="Phone" data-can-render="true" class="nav__item">iPhone</p>
+                                </div>
+
+                                <dvi class="">
+                                    <p data-link="/Store/Accessory" data-type="Accessory" data-can-render="true" class="nav__item">Phụ kiện</p>
+                                </dvi>
+
+                                <div class="">
+                                    <p data-link="/Store/Repair" data-type="Repair" data-can-render="true" class="nav__item">Sửa chữa</p>
+                                </div>
+
+                                <did class="">
+                                    <p data-link="/Store/OldPhone" data-type="OldPhone" data-can-render="true" class="nav__item">Điện thoại cũ</p>
+                                </did>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="h-2 order3 header__user">
+                        <div class="">
+                            <div class="row ali-center jus-end">
+                                <div class="ma-r-12">
+                                    <i class="fa-solid fa-magnifying-glass circle-btn nav__item" data-can-render="false"></i>
+                                </div>
+
+                                <div class="forsure">
+                                    <a data-link="/Store/UserCart" data-can-render="true"  class="user__cart nav__item relative">
+                                        <i class="fa-solid fa-bag-shopping circle-btn"></i>
+                                        <p class="product__count"></p>
+                                        <div class="header__notify">
+                                            <p style="color: #222">Đã thêm sản phẩm vào giỏ hàng</p>
+                                            <div class="product__buy">
+                                                <button>Xem giỏ hàng</button>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product__search">
+                    <form action="" method="get" class="get__product-name">
+                        <i class="fa-solid fa-magnifying-glass nav__item"></i>
+                        <input type="text" name="SP_TEN" placeholder="Tìm kiếm sản phẩm" />
+                        <i class="fa-solid fa-xmark" style="cursor: pointer;"></i>
+                    </form>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+        <div id="content">
+            
+        </div>
+
+        <div id="footer">
+            <div class="gird wide">
+                <div class="about-web">
+                    <p>Ngô Văn Sơn</p>
+                    <p>2001202222</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //_Layout
+        var navbar = $(".header__navbar");
+        var productCount = $(".user__cart p").first();
+        var userCart = JSON.parse(localStorage.getItem("user_cart"));
+        var cartBtn = $(".user__cart");
+        var searchBtn = $(".fa-magnifying-glass.circle-btn");
+        var endSearchBtn = $(".fa-solid.fa-xmark");
+        var navItems = $(".nav__item");
+        var formSearch = $(".get__product-name");
+
+        if (userCart && userCart.length > 0) {
+            productCount.addClass("active");
+            productCount.text(TotalProduct(userCart));
+        }
+
+        RenderLayout();
+
+        Array.from(navItems).forEach(navItem => {
+            navItem.addEventListener("click", e => {
+                document.querySelector(".nav__item.active").classList.remove("active");
+
+                navItem.classList.add("active");
+
+                if (navItem.dataset.canRender === "true") {
+                    RenderLayout();
+                    document.documentElement.scrollTop = 0;
+                }
+            });
+        });
+
+        formSearch.submit(e => {
+            e.preventDefault();
+
+            if ($("input[name=SP_TEN]").val() !== "") {
+                $.ajax({
+                    url: "/Store/Search",
+                    data: formSearch.serialize(),
+                    success: function (result) {
+                        $("#content").html(result);
+                        $("#content").css("padding-top", $("#header").height() + "px");
+                        endSearchBtn.click();
+                    }
+                });
+            }
+        });
+
+        cartBtn.click(e => {
+            e.preventDefault();
+
+            $.ajax({
+                url: cartBtn.data("link"),
+                success: function (result) {
+                    $("#content").html(result);
+                    document.documentElement.scrollTop = 0;
+                }
+            });
+        });
+
+        function RenderLayout() {
+            var activeItem = $(".nav__item.active");
+
+            $.ajax({
+                url: activeItem.data("link"),
+                success: function (result) {
+                    $("#content").html(result);
+                    $("#content").css("padding-top", $("#header").height() + "px");
+                }
+            });
+        }
+
+        //====================================================================
+        searchBtn.click((e) => {
+            $("#header").addClass("searching");
+        });
+
+        endSearchBtn.click((e) => {
+            $("#header").removeClass("searching").addClass("not-search");
+        });
+
+        $(".layout").click((e) => {
+            $("#header").removeClass("searching").addClass("not-search");
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="//code.tidio.co/fvewgxhyoymrpmnqgbv64lyherwomvx9.js" async></script>
 </body>
 </html>

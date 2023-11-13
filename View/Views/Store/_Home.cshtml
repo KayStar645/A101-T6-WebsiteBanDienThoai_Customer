@@ -1,0 +1,296 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<style>
+    .dot__index {
+        background: rgb(157 151 151) !important;
+    }
+
+    .content__category {
+        margin-top: 80px;
+    }
+
+    .content__banner img {
+        height: 400px !important;
+    }
+
+    .policy__item-body .policy__img {
+        height: 70px;
+    }
+
+    .circle-btn.absolute {
+        left: 50%;
+    }
+
+    .content__policy {
+        background: url('https://www.topzone.vn/images/newyear/desktop/policy-bg.png') center / cover no-repeat;
+        padding: 0;
+        margin: 0;
+    }
+
+        .content__policy img {
+            width: 100px;
+        }
+
+    .policy__item-body p {
+        padding: 12px 0 16px;
+    }
+
+    .category__list {
+        padding-bottom: 40px;
+    }
+
+    .category__item {
+        background: initial;
+        padding: 0;
+    }
+
+        .category__item img {
+            width: 150px;
+        }
+
+    .product__type img {
+        width: 430px;
+    }
+
+    .product__list {
+        padding-bottom: 30px;
+    }
+
+    .decor__item {
+        position: absolute;
+        left: var(--l);
+        right: var(--r);
+        top: -80px;
+        width: 180px;
+    }
+
+    .product__info img {
+        max-width: 257px;
+    }
+</style>
+
+
+<div class="content__banner">
+    <div id="carouselExampleIndicators" class="carousel slide relative" data-ride="carousel">
+        <ol class="carousel-indicators dot__list" style="transform: initial">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active dot__index"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1" class="dot__index"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2" class="dot__index"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3" class="dot__index"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4" class="dot__index"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/11/banner/IP15-2880-800-1920x533.png" />
+            </div>
+
+            <div class="carousel-item">
+                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/10/banner/AWCS-2880-800-1920x548-1.png" />
+            </div>
+
+            <div class="carousel-item">
+                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/10/banner/MacBook-Air-2880-800-1920x533.png" />
+            </div>
+
+            <div class="carousel-item">
+                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/11/banner/ipad10-2880-800-1920x533.png" />
+            </div>
+
+            <div class="carousel-item">
+                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/10/banner/AirPods2-2880-800-1920x533.png" />
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <i class="fa-solid fa-arrow-left circle-btn absolute"></i>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <i class="fa-solid fa-arrow-right circle-btn absolute"></i>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<div class="content__policy">
+    <div class="wide grid">
+        <div class="row ali-start jus-between policy__list" style="padding-top: 12px;">
+            <div class="h-3 l-3 m-6 s-6 text-center policy__item">
+                <div class="policy__item-body">
+                    <img src="~/icon/checked.png" style="width: 45px;" />
+                    <div class="forsure">
+                        <p>Mẫu mã đa dạng,<br /> chính hãng</p>
+                    </div>
+                </div>
+            </div>
+            <div class="h-3 l-3 m-6 s-6 text-center policy__item">
+                <div class="policy__item-body">
+                    <img src="~/icon/truck.png" style="width: 45px;" />
+                    <div class="forsure">
+                        <p>Giao hàng toàn quốc</p>
+                    </div>
+                </div>
+            </div>
+            <div class="h-3 l-3 m-6 s-6 text-center policy__item">
+                <div class="policy__item-body">
+                    <img src="~/icon/shield.png" style="width: 45px;" />
+                    <div class="forsure">
+                        <p>Bảo hành cam kết <br /> tới 12 tháng</p>
+                    </div>
+                </div>
+            </div>
+            <div class="h-3 l-3 m-6 s-6 text-center policy__item">
+                <div class="policy__item-body">
+                    <img src="~/icon/turn.png" style="width: 45px;" />
+                    <div class="forsure">
+                        <p class="text-center">Có thể đổi trả tại <br /> Thegioididong và DienMaXANH</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wide grid relative">
+    <div class="product__list">
+        <div class="text-center" style="padding: 40px 0;">
+            <p style="font-size: 3rem; color: #fff; font-weight: 600;">Điện thoại</p>
+        </div>
+        <div class="row relative w-100">
+            <div class="h-3">
+                <div id="product1" class="carousel slide carousel-fade" data-interval="false">
+                    <div class="carousel-inner relative">
+                        <div class="product__memory">
+                            <ol class="carousel-indicators" style="transform: initial; position: initial">
+                                <li data-target="#product1" data-slide-to="0" class="">128GB</li>
+                                <li data-target="#product1" data-slide-to="1" class="">256GB</li>
+                            </ol>
+                        </div>
+
+                        <div class="carousel-item">
+                            <a data-link="/Store/ProductDetail/1" class="product__info p-b-40 relative">
+                                <div class=" product__info--new relative">
+                                    <p class="product__status">Mới</p>
+                                    <div class="row ali-center jus-center">
+                                        <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/42/245545/s16/iphone-14-plus-gold-thumbtz-650x650.png" class="p-b-40" />
+                                    </div>
+                                    <p class="product__name">IPhone 14 Plus</p>
+                                    <p class="product__price">24.490.000</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="carousel-item">
+                            <a data-link="/Store/ProductDetail/1" class="product__info p-b-40 relative">
+                                <div class=" product__info--new relative">
+                                    <p class="product__status">Mới</p>
+                                    <div class="row ali-center jus-center">
+                                        <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/42/289710/s16/iphone-14-plus-black-thumbtz-650x650.png" class="p-b-40" />
+                                    </div>
+                                    <p class="product__name">IPhone 14 Plus</p>
+                                    <p class="product__price">25.900.000</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product__list">
+        @* <div class="row relative w-100">
+            @foreach (var product in accessories)
+            {
+                <div class="h-3">
+                    <div id="@product.SP_MaDT1[0]" class="carousel slide carousel-fade relative" data-interval="false">
+                        <div class="carousel-inner">
+                            @for (int i = 0; i < product.SP_MaDT1.Count; i++)
+                            {
+                                var ma = product.SP_MaDT1[i];
+
+                                <div class="carousel-item">
+                                    <a data-link="/Store/ProductDetail/@ma?index=@i" class="product__info p-b-40 relative">
+                                        <div class=" product__info--new relative">
+                                            @{
+                                                if (product.SP_TinhTrangs1[i].Equals("False"))
+                                                {
+                                                    <p class="product__status">Mới</p>
+                                                }
+                                            }
+                                            <img src="~/Assets/Image/Product/@product.SP_AnhDT1[i][0]" />
+                                            <p class="product__name">@product.SP_Ten</p>
+                                            <p class="product__price">@product.SP_GiaBans1[i]</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div> *@
+        <script>
+            var carouselItems = $(".product__list .h-3");
+            var productLists = $(".product__list");
+            var productInfos = $(".product__info");
+            var categories = $(".category-item");
+            var navItems = $(".nav__item");
+
+            Array.from(categories).forEach(category => {
+                category.addEventListener("click", e => {
+                    $.ajax({
+                        url: category.dataset.link,
+                        success: function (result) {
+                            $("#content").html(result);
+                            document.documentElement.scrollTop = 0;
+
+                            Array.from(navItems).forEach(navItem => {
+                                if (navItem.dataset.type === category.dataset.type) {
+                                    document.querySelector(".nav__item.active").classList.remove("active");
+                                    navItem.classList.add("active");
+                                }
+                            });
+                        }
+                    });
+                })
+            });
+
+            Array.from(productInfos).forEach(productInfo => {
+                productInfo.addEventListener("click", e => {
+                    e.preventDefault();
+
+                    $.ajax({
+                        url: productInfo.dataset.link,
+                        success: function (result) {
+                            $("#content").html(result);
+                            document.documentElement.scrollTop = 0;
+                        }
+                    })
+                });
+            });
+
+            Array.from(carouselItems).forEach(item => {
+                item.querySelector(".carousel-item").classList.add("active");
+                if (item.querySelector(".carousel-indicators li")) {
+                    item.querySelector(".carousel-indicators li").classList.add("active");
+                }
+
+                item.addEventListener("mouseout", (e) => {
+                    item.querySelector(".carousel-item.active .product__info").style = `box-shadow: none;`;
+
+                })
+            });
+
+            Array.from(productLists).forEach(productList => {
+                productList.addEventListener("mouseover", (e) => {
+                    if (e.target.closest(".product__memory li") || e.target.closest(".product__info")) {
+                        var parent = getParentElement(e.target, ".carousel-fade");
+                        parent.querySelector(".carousel-item.active .product__info").style = `box-shadow: 9px 9px 16px rgb(0 0 0 / 44%), -9px -9px 16px rgb(83 83 86);`;
+                    }
+                });
+            });
+        </script>
+    </div>
+</div>

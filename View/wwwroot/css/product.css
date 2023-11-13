@@ -1,0 +1,65 @@
+﻿* {
+    list-style: none;
+}
+
+body {
+    background: #3e3e3f;
+}
+
+.page-list {
+    margin-top: 40px;
+    font-size: 1.6rem;
+    color: #fff;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.pagination li,
+.pagination li a {
+    border-radius: 5px;
+    background: transparent;
+    border: none;
+}
+
+.pagination li.active a {
+    background: var(--bg-item);
+}
+
+.pagination li a {
+    padding: 8px 16px;
+    margin: 0 6px;
+}
+
+.pagination li a:hover {
+    background: var(--bg-item);
+    cursor: pointer;
+}
+
+.content__banner img {
+    border-radius: 20px;
+}
+
+.product__info .product__name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    background: var(--bg-item);
+    cursor: pointer;
+}
+
+#myCarousel {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.circle-btn.absolute {
+    left: var(--left);
+}
