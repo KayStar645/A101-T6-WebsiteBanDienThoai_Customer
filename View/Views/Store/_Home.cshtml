@@ -1,5 +1,8 @@
-﻿@{
+﻿@using Core.Application.Responses;
+@using Domain.DTOs;
+@{
     ViewBag.Title = "Home";
+    var categories = ViewData["categories"] as List<CategoryDto>;
 }
 
 <style>
@@ -153,85 +156,45 @@
 </div>
 
 <div class="wide grid relative">
-    <div class="product__list">
-        <div class="text-center" style="padding: 40px 0;">
-            <p style="font-size: 3rem; color: #fff; font-weight: 600;">Điện thoại</p>
-        </div>
-        <div class="row relative w-100">
-            <div class="h-3">
-                <div id="product1" class="carousel slide carousel-fade" data-interval="false">
-                    <div class="carousel-inner relative">
-                        <div class="product__memory">
-                            <ol class="carousel-indicators" style="transform: initial; position: initial">
-                                <li data-target="#product1" data-slide-to="0" class="">128GB</li>
-                                <li data-target="#product1" data-slide-to="1" class="">256GB</li>
-                            </ol>
-                        </div>
-
-                        <div class="carousel-item">
-                            <a data-link="/Store/ProductDetail/1" class="product__info p-b-40 relative">
-                                <div class=" product__info--new relative">
-                                    <p class="product__status">Mới</p>
-                                    <div class="row ali-center jus-center">
-                                        <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/42/245545/s16/iphone-14-plus-gold-thumbtz-650x650.png" class="p-b-40" />
-                                    </div>
-                                    <p class="product__name">IPhone 14 Plus</p>
-                                    <p class="product__price">24.490.000</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="carousel-item">
-                            <a data-link="/Store/ProductDetail/1" class="product__info p-b-40 relative">
-                                <div class=" product__info--new relative">
-                                    <p class="product__status">Mới</p>
-                                    <div class="row ali-center jus-center">
-                                        <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/42/289710/s16/iphone-14-plus-black-thumbtz-650x650.png" class="p-b-40" />
-                                    </div>
-                                    <p class="product__name">IPhone 14 Plus</p>
-                                    <p class="product__price">25.900.000</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="product__list">
-        @* <div class="row relative w-100">
-            @foreach (var product in accessories)
+    <div class="product__list flex-lg-nowrap">
+        @if (categories != null)
+        {
+            foreach (var category in categories)
             {
-                <div class="h-3">
-                    <div id="@product.SP_MaDT1[0]" class="carousel slide carousel-fade relative" data-interval="false">
-                        <div class="carousel-inner">
-                            @for (int i = 0; i < product.SP_MaDT1.Count; i++)
-                            {
-                                var ma = product.SP_MaDT1[i];
-
-                                <div class="carousel-item">
-                                    <a data-link="/Store/ProductDetail/@ma?index=@i" class="product__info p-b-40 relative">
-                                        <div class=" product__info--new relative">
-                                            @{
-                                                if (product.SP_TinhTrangs1[i].Equals("False"))
-                                                {
-                                                    <p class="product__status">Mới</p>
-                                                }
-                                            }
-                                            <img src="~/Assets/Image/Product/@product.SP_AnhDT1[i][0]" />
-                                            <p class="product__name">@product.SP_Ten</p>
-                                            <p class="product__price">@product.SP_GiaBans1[i]</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-                        </div>
+                @if (((List<ProductDto>)ViewData[category.Id.ToString()]).Count != 0)
+                {
+                    <div class="text-center" style="padding: 40px 0;">
+                        <p style="font-size: 3rem; color: #fff; font-weight: 600;">@category.Name</p>
                     </div>
-                </div>
+                    foreach (var product in (List<ProductDto>)ViewData[category.Id.ToString()])
+                    {
+                        <div class="row relative w-100 flex-lg-nowrap">
+                            <div class="h-3">
+                                <div id="product1" class="carousel slide carousel-fade" data-interval="false">
+                                    <div class="carousel-inner relative">
+
+                                        <div class="carousel-item">
+                                            <a data-link="/Store/ProductDetail/1" class="product__info p-b-40 relative">
+                                                <div class=" product__info--new relative">
+                                                    <p class="product__status">Mới</p>
+                                                    <div class="row ali-center jus-center">
+                                                        <img src="@product.Images.FirstOrDefault()" class="p-b-40" />
+                                                    </div>
+                                                    <p class="product__name">@product.Name</p>
+                                                    <p class="product__price">@($"{product.Price:N0} đ")</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
             }
-        </div> *@
-        <script>
+        }
+    </div>
+    <script>
             var carouselItems = $(".product__list .h-3");
             var productLists = $(".product__list");
             var productInfos = $(".product__info");
@@ -292,5 +255,4 @@
                 });
             });
         </script>
-    </div>
 </div>
