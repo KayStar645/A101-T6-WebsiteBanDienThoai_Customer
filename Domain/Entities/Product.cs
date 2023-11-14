@@ -22,8 +22,8 @@ namespace Domain.Entities
 
         public Category? Category { get; set; }
 
-        //public Color? Color { get; set; }
+        public Color? Color { get; set; }
 
-        //public Capacity? Capacity { get; set; }
+        public Capacity? Capacity { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace Application.Services
             _mapper = mapper;
         }
 
+        // Chưa áp dụng CTKM
         public async Task<PaginatedResult<List<ProductDto>>> GetAll(ListProductRequest pRequest)
         {
             var query = _productRepo.GetAllInclude();

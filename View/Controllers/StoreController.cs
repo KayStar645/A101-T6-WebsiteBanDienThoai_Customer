@@ -57,7 +57,7 @@ namespace View.Controllers
                 listProductRequest.CategoryId = category.Id;
                 var products = await _productService.GetAll(listProductRequest);
 
-                ViewData[category.Id.ToString()] = categoriesResult.Data;
+                ViewData[category.Id.ToString()] = products.Data;
             }
 
             return PartialView("_Home");
