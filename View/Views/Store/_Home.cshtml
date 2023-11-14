@@ -1,5 +1,8 @@
-﻿@{
+﻿@using Core.Application.Responses;
+@using Domain.DTOs;
+@{
     ViewBag.Title = "Home";
+    var categories = ViewData["categories"] as List<CategoryDto>;
 }
 
 <style>

@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Core.Application.Responses;
+@using Domain.DTOs;
+@{
+    var categories = ViewData["categories"] as List<CategoryDto>;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -73,23 +79,16 @@
                             <div class="h-0 m-0 l-0 s-2">
                                 <i class="fa-solid fa-bars"></i>
                             </div>
-
                             <div class="s-0 row ali-center jus-center w-100">
-                                <div class="">
-                                    <p data-link="/Store/Phone" data-type="Phone" data-can-render="true" class="nav__item">iPhone</p>
-                                </div>
-
-                                <dvi class="">
-                                    <p data-link="/Store/Accessory" data-type="Accessory" data-can-render="true" class="nav__item">Phụ kiện</p>
-                                </dvi>
-
-                                <div class="">
-                                    <p data-link="/Store/Repair" data-type="Repair" data-can-render="true" class="nav__item">Sửa chữa</p>
-                                </div>
-
-                                <did class="">
-                                    <p data-link="/Store/OldPhone" data-type="OldPhone" data-can-render="true" class="nav__item">Điện thoại cũ</p>
-                                </did>
+                                @if (categories != null)
+                                {
+                                    foreach (var category in categories)
+                                    {
+                                        <div class="">
+                                            <p data-link="/Store/Phone" data-type="Phone" data-can-render="true" class="nav__item">@category.Name</p>
+                                        </div>
+                                    }
+                                }
                             </div>
                         </div>
                     </div>
