@@ -1,0 +1,546 @@
+
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+<link href="~/css/product_detail.css" rel="stylesheet" />
+
+<style>
+    .comment__list {
+        height: auto;
+        max-height: 400px;
+    }
+
+    .product__image img {
+        padding: 0 !important;
+        width: 100%;
+    }
+
+    #content {
+        height: auto;
+        min-height: auto;
+    }
+
+    .product__detail {
+        height: 75vh;
+        overflow: auto;
+    }
+
+    #support{
+        background: #fff;
+    }
+
+    .parent .child {
+        display: block;
+    }
+
+    .parent.active .child{
+        display: none;
+    }
+</style>
+
+<div class="grid wide p-t-24">
+    <div class="row product__container" style="padding-bottom: 50px;">
+        <div class="h-5">
+            <div class="product__image">
+                <div id="carouselExampleIndicators" class="carousel slide relative" data-interval="false" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row ali-center jus-center">
+                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-blue-thumbtz-1-650x650.png"  />
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row ali-center jus-center">
+                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-xanh-duong-1-650x650.jpg"  />
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row ali-center jus-center">
+                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-xanh-duong-2-650x650.jpg"  />
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <i class="fa-solid fa-arrow-left circle-btn absolute"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <i class="fa-solid fa-arrow-right circle-btn absolute"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+                    <ol class="carousel-indicators dot__list row jus-center ali-center p-t-16 p-l-16" style="transform: initial; width: fit-content">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="dot__index ma-t-8 ma-b-8"
+                            style="background: url('https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-blue-thumbtz-1-650x650.png') center /cover no-repeat">
+                        </li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="dot__index ma-t-8 ma-b-8"
+                            style="background: url('https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-xanh-duong-1-650x650.jpg') center /cover no-repeat">
+                        </li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2" class="dot__index ma-t-8 ma-b-8"
+                            style="background: url('https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-xanh-duong-2-650x650.jpg') center /cover no-repeat">
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-7 relative">
+            <div class="product__detail">
+                <p class="product__count" hidden>1</p>
+                <h1 class="product__name">iPhone 14</h1>
+                <h2 class="product__name product__price p-t-12">12.000.000</h2>
+
+                <div class="product__memory detail__part">
+                    <p class="title">Dung lượng</p>
+                    <ul class="row">
+                        <li class="ma-r-12" data-index="0">
+                            <a data-link="/Store/ProductDetail/1" class="product__storage">128 GB</a>
+                        </li>
+                        <li class="ma-r-12" data-index="1">
+                            <a data-link="/Store/ProductDetail/2" class="product__storage">256 GB</a>
+                        </li>
+                        <li class="ma-r-12" data-index="2">
+                            <a data-link="/Store/ProductDetail/3" class="product__storage">512 GB</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="product__gift p-b-12 detail__part">
+                    <p class="title">Sản phẩm đi kèm</p>
+                    <ul>
+                        @* @{
+                            foreach (var gift in info.SP_PhuKienKems1[index])
+                            {
+                                <li>@gift</li>
+                            }
+                        } *@
+                    </ul>
+                </div>
+            </div>
+
+            <div class="product__buy detail">
+                <button>Mua ngay</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="support" style="padding-bottom: 120px;">
+    <div class="grid wide">
+        <div class="suggest-product">
+            <h2 class="title">Phụ kiện nên có cho iPhone 14</h2>
+        </div>
+
+        @* <div class="product__list">
+            <div id="suggest-list" class="carousel slide relative" data-interval="false">
+                @foreach (var suggest in suggests)
+                {
+                    <div class="carousel-item">
+                        <div class="row">
+                            @for (int i = 0; i < suggest.Count; i++)
+                            {
+                                var item = suggest[i];
+                                <div class="h-3">
+                                    <a data-link="/Store/ProductDetail/@item.SP_MaDT1[0]?index=0" class="product__info p-b-40 relative">
+                                        <div class=" product__info--new relative row flex-column ali-center">
+                                            <img src="~/Assets/Image/Product/@item.SP_AnhDT1[0][0]" class="p-b-40" />
+                                            <p class="product__name">@item.SP_Ten</p>
+                                            <p class="product__price">@item.SP_GiaBans1[0]</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <a class="carousel-control-prev" href="#suggest-list" role="button" data-slide="prev">
+                    <i class="fa-solid fa-arrow-left circle-btn absolute" style="left: 0"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#suggest-list" role="button" data-slide="next">
+                    <i class="fa-solid fa-arrow-right circle-btn absolute" style="right: 0"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div> *@
+
+        @* <div id="comment">
+            <div class="product__comment relative not-active">
+                <h2 class="title">Hỏi đáp về  iPhone 14</h2>
+
+                <div class="add-comment">
+                    <form action="/Store/AddComment" method="get" class="relative h-100 form__comment" id="user__form">
+                        <input type="text" name="MASP" hidden value="@id" />
+                        <textarea name="BL_NOIDUNG" placeholder="Mời anh/chị bình luận hoặc đặt câu hỏi"></textarea>
+
+                        <div class="user__account">
+                            <div class="account__info row">
+                                <div class="h-12 p-b-16 p-l-8 p-r-8">
+                                    <div class="form__group">
+                                        <div class="row ali-center">
+                                            <div class="h-2">
+                                                <label class="gender__label relative">
+                                                    Anh
+                                                    <input type="radio" name="KH_GIOITINH" rule="required" value="True" class="form__control">
+                                                    <div class="checkbox"></div>
+                                                </label>
+                                            </div>
+                                            <div class="h-2">
+                                                <label class="gender__label relative">
+                                                    Chị
+                                                    <input type="radio" name="KH_GIOITINH" rule="required" value="False" class="form__control">
+                                                    <div class="checkbox"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <span class="form__warning ma-t-8"></span>
+                                    </div>
+                                </div>
+
+                                <div class="h-6 p-l-8 p-r-8">
+                                    <div class="form__group relative form__item">
+                                        <label for="fullname">Họ và tên <span style="color: red; vertical-align: middle">*</span></label>
+                                        <input type="text" name="KH_TEN" rule="required|fullname" id="fullname" class="form__control" placeholder="" value="">
+                                        <span class="form__warning"></span>
+                                    </div>
+                                </div>
+
+                                <div class="h-6 p-l-8 p-r-8">
+                                    <div class="form__group relative form__item">
+                                        <label for="phone_number">Số điện thoại <span style="color: red; vertical-align: middle">*</span></label>
+                                        <input type="text" name="KH_SDT" rule="required|phoneNumber" id="phone_number" class="form__control" placeholder="">
+                                        <span class="form__warning"></span>
+                                    </div>
+                                </div>
+
+                                <div class="h-6 p-t-16 p-l-8 p-r-8">
+                                    <div class="form__group relative form__item">
+                                        <label for="phone_number">Địa chỉ</label>
+                                        <input type="text" name="KH_DIACHI" id="address" class="form__control" placeholder="">
+                                        <span class="form__warning"></span>
+                                    </div>
+                                </div>
+
+                                <div class="h-6 p-t-16 p-l-8 p-r-8">
+                                    <div class="form__group relative form__item">
+                                        <button type="submit">GỬI</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="comment__container relative">
+                    <div class="forsure">
+                        <div class="comment__list">
+                            @{
+                                if (comments != null)
+                                {
+                                    @Html.Partial("CommentPartial", comments, new ViewDataDictionary { { "id", info.SP_MaDT1[index] } });
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> *@
+
+        <div class="forsure" style="padding-top: 40px;">
+            <div class="row ali-center jus-center" style="font-size: 2rem; font-weight: 500; padding-bottom: 20px">Thông số kỹ thuật</div>
+
+            <div class="row ali-center jus-center">
+                <div style="width: 500px;" class="parent">
+                    <div class="row ali-center jus-between toggle" style="background-color: #f5f5f7; padding: 16px 10px; border-radius: 5px; cursor: pointer;">
+                        <p style="font-size: 1.6rem; font-weight: 500; color: #000">Màn hình</p>
+
+                        <img src="~/icon/ic_minus.png" class="icon" style="width: 20px;" />
+                    </div>
+
+                    <div class="child">
+                        <div class="row ali-center jus-between" style="padding: 16px 8px; border-bottom: 1px solid #ddd;">
+                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">Công nghệ màn hình</p>
+                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">OLED</p>
+                        </div>
+                        <div class="row ali-center jus-between" style="padding: 16px 8px; border-bottom: 1px solid #ddd;">
+                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">Công nghệ màn hình</p>
+                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">OLED</p>
+                        </div>
+                        <div class="row ali-center jus-between" style="padding: 16px 8px; border-bottom: 1px solid #ddd;">
+                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">Công nghệ màn hình</p>
+                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">OLED</p>
+                        </div>
+                        <div class="row ali-center jus-between" style="padding: 16px 8px; border-bottom: 1px solid #ddd;">
+                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">Công nghệ màn hình</p>
+                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">OLED</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //product detail
+    var productParameter = $(".product__parameter");
+    var buyBtn = $(".product__buy.detail button");
+    var productName = $(".product__name").first();
+    var productPrice = $(".product__price");
+    var productImage = $(".product__image img");
+    var headerNotiy = $(".header__notify");
+    var ImagecarouselItem = $(".product__image .carousel-item").first();
+    var SuggestItem = $("#suggest-list .carousel-item").first();
+    var memories = $(".product__memory li");
+    var productLeft = $(".product__count");
+    var userAccount = $(".user__account");
+    var commentBlock = $(".product__comment");
+    var userForm = $("#user__form").get(0);
+    var commentText = $(".add-comment textarea").first();
+    var addCommentBtn = $(".add-comment button");
+    var userInfo = JSON.parse(localStorage.getItem("user_info"));
+    var commentList = $(".comment__list").first();
+    var userInfo = JSON.parse(localStorage.getItem("user_info")) || {};
+    @* var form = new Validate(".form__comment"); *@
+    var productList = $(".product__list").get(0);
+    var formData;   
+    var productInfos = $(".product__info");
+    var productStorages = $(".product__storage");
+    var inputs = $("#user__form input[type='text']");
+    var userName = $("#fullname").get(0);
+    var userPhone = $("#phone_number").get(0);
+    var userAddress = $("#address").get(0);
+    var userGenderNam = $("#user__form input[name = KH_GIOITINH]").get(0);
+    var userGenderNu = $("#user__form input[name = KH_GIOITINH]").get(1);
+    var userDetail = JSON.parse(localStorage.getItem("user_info")) || {};
+    var toggleCollapses = $(".toggle");
+
+     Array.from(toggleCollapses).forEach(toggleCollapse => {
+        toggleCollapse.addEventListener("click", e => {
+            const parent = e.target.parentNode;
+            const image = parent.querySelector(".icon");
+
+            parent.classList.toggle("active");
+
+            if(parent.classList.contains('active')){
+                image.src = "../../icon/ic_plus.png"
+            }
+            else{
+                image.src = "../../icon/ic_minus.png"
+            }
+        });
+    });
+
+    if (Array.from(inputs).length > 0) {
+        userName.addEventListener("input", (e) => {
+            userDetail.name = userName.value;
+
+            localStorage.setItem("user_info", JSON.stringify(userDetail));
+        });
+
+        userPhone.addEventListener("input", (e) => {
+            userDetail.phone = userPhone.value;
+
+            localStorage.setItem("user_info", JSON.stringify(userDetail));
+        });
+
+        userAddress ? userAddress.addEventListener("input", (e) => {
+            userDetail.address = userAddress.value;
+
+            localStorage.setItem("user_info", JSON.stringify(userDetail));
+        }) : null;
+
+        userGenderNam.addEventListener("input", (e) => {
+            if (userGenderNam.checked) {
+                userDetail.gender = "Nam";
+
+                localStorage.setItem("user_info", JSON.stringify(userDetail));
+            }
+        });
+
+        userGenderNu.addEventListener("input", (e) => {
+            if (userGenderNu.checked) {
+                userDetail.gender = "Nữ";
+
+                localStorage.setItem("user_info", JSON.stringify(userDetail));
+            }
+        });
+
+        if (Object.keys(userDetail).length > 0) {
+            userDetail.gender === "Nam" && userDetail.gender ? userGenderNam.checked = true : userGenderNu.checked = true;
+            userDetail.phone ? userPhone.value = userDetail.phone : userPhone.value = "";
+            userDetail.name ? userName.value = userDetail.name : userName.value = "";
+            userAddress ? userDetail.address ? userAddress.value = userDetail.address : userAddress.value = "" : null;
+        }
+
+        //=======================================================================
+        Array.from(inputs).forEach(input => {
+            input.addEventListener("click", (e) => {
+                var parentInput = getParentElement(e.target, ".form__item");
+
+                parentInput.classList.add("active");
+                parentInput.classList.replace("non-active", "active");
+            });
+
+            input.addEventListener("blur", (e) => {
+                var parentInput = getParentElement(e.target, ".form__item");
+                var text = parentInput.querySelector("input").value;
+
+                if (text.trim() == "") {
+                    parentInput.classList.replace("active", "non-active");
+                }
+                else {
+                    parentInput.classList.add("success");
+                }
+            });
+
+            if (input.value !== "") {
+                var parent = getParentElement(input, ".form__group");
+
+                if (parent) {
+                    parent.classList.add("active", "success");
+                }
+            }
+        });
+    }
+
+    Array.from(productInfos).forEach(productInfo => {
+        productInfo.addEventListener("click", e => {
+            e.preventDefault();
+
+            $.ajax({
+                url: productInfo.dataset.link,
+                success: function (result) {
+                    $("#content").html(result);
+                    document.documentElement.scrollTop = 0; 
+                }
+            })
+        });
+    });
+
+    Array.from(productStorages).forEach(productStorage => {
+        productStorage.addEventListener("click", e => {
+            e.preventDefault();
+
+            $.ajax({
+                url: productStorage.dataset.link,
+                success: function (result) {
+                    $("#content").html(result);
+                    document.documentElement.scrollTop = 0; 
+                }
+            })
+        });
+    })
+
+    ImagecarouselItem.addClass("active");
+    SuggestItem.addClass("active");
+
+    Array.from(memories).forEach(memory => {
+        var index = memory.dataset.index;
+        var type = memory.dataset.type;
+
+        memory.classList.add(index == type ? "active" : "non")
+    });
+
+    var productMemory = $(".product__memory li.active");
+    var productId = $(".product__memory li.active a");
+
+    productParameter.click((e) => {
+        if (e.target.closest(".arrow__list")) {
+            document.querySelector(".product__parameter").classList.toggle("active");
+        }
+    });
+
+    ////Lưu thông tin sản phẩm khách chọn
+    buyBtn.click((e) => {
+        var userCart = JSON.parse(localStorage.getItem("user_cart")) || [];
+
+        var info = {
+            "id": productId.data("id") || $(".product__detail input").first().val(),
+            "name": productName.text() + " " + (productMemory.text() ? productMemory.text() : ""),
+            "price": parseInt(DeleteCommas(productPrice.text())),
+            "number": 1,
+            "image": productImage.attr('src'),
+            "maxTotal": productLeft.text()
+        };
+
+
+        if (CheckProductExitst(userCart, info.name)) {
+            userCart[GetIndex(userCart, info.name)].number = userCart[GetIndex(userCart, info.name)].number + 1;
+        }
+        else {
+            userCart.push(info);
+        }
+
+        localStorage.setItem("user_cart", JSON.stringify(userCart));
+
+        productCount.addClass("active");
+
+        productCount.text(TotalProduct(userCart));
+        headerNotiy.addClass("active");
+        setTimeout(() => {
+            headerNotiy.removeClass("active");
+        }, 2000)
+    });
+
+    @* form.onSubmit = function (value) {
+        formData = value;
+    } *@
+
+    commentList.scrollTop(commentList.prop("scrollHeight"));
+
+    commentText.click(e => {
+        commentBlock.removeClass("not-active").addClass("active");
+    });
+
+    $(".form__comment").submit((e) => {
+        e.preventDefault();
+
+        userInfo = JSON.parse(localStorage.getItem("user_info")) || {};
+
+        if (commentText.val() !== "") {
+            $.ajax({
+                url: "/Store/AddComment",
+                type: "get",
+                data: $(".form__comment").serialize(),
+                success: function (result) {
+                    commentList.append(CreateCommentItem(userInfo, commentText.val()));
+                    commentList.scrollTop(commentList.prop("scrollHeight"));
+                    commentText.val("");
+                }
+            });
+        }
+
+        else {
+        }
+    });
+
+    if (Object.keys(userInfo).length > 0) {
+        userInfo.phone ? $(".add-comment input[name = KH_SDT]").val(userInfo.phone) : null;
+        userInfo.name ? $(".add-comment input[name = KH_TEN]").val(userInfo.name) : null;
+
+        userInfo.gender && userInfo.gender === "Nam" ? $(".add-comment input[name = KH_GIOITINH]").val("True") : $(".add-comment input[name = KH_GIOITINH]").val("False");
+    }
+
+    var commentListItem = $(".comment__item");
+
+    Array.from(commentListItem).forEach(item => {
+        if (item.querySelector(".admin-role")) {
+            item.classList.add("answer");
+        }
+    });
+
+    var answers = $(".comment__item.answer");
+
+    Array.from(answers).forEach(answer => {
+        var adminAnswers = answer.querySelectorAll(".admin-role");
+
+        if (adminAnswers.length > 1) {
+            answer.querySelector(".relationship").style.height = (82 * (adminAnswers.length - 1) + 50) + "px";
+        }
+    });
+</script>
