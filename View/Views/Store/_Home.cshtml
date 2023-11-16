@@ -167,13 +167,13 @@
                         <p style="font-size: 3rem; color: #fff; font-weight: 600;">@category.Name</p>
                     </div>
                     <div class="row relative w-100 flex-lg-nowrap">
-                        @foreach (var product in (List<ProductDto>)ViewData[category.Id.ToString()])
+                        @foreach (ProductDto product in (List<ProductDto>)ViewData[category.Id.ToString()])
                         {
                             <div class="h-3">
                                 <div id="product1" class="carousel slide carousel-fade" data-interval="false">
                                     <div class="carousel-inner relative">
                                         <div class="carousel-item">
-                                            <a data-link="/Store/ProductDetail/1" class="product__info p-b-40 relative">
+                                            <div data-link="/Store/ProductDetail/@product.Id" class="product__info p-b-40 relative">
                                                 <div class=" product__info--new relative">
                                                     <p class="product__status">Mới</p>
                                                     <div class="row ali-center jus-center">
@@ -182,7 +182,7 @@
                                                     <p class="product__name">@product.Name</p>
                                                     <p class="product__price">@($"{product.Price:N0} đ")</p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
