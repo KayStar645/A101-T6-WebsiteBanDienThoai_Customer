@@ -3,6 +3,7 @@ using Application.Interfaces.Services;
 using AutoMapper;
 using Core.Application.Responses;
 using Domain.DTOs;
+using Domain.Entities;
 using Domain.Requests.Products;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,10 +26,21 @@ namespace Application.Services
         {
             var query = _productRepo.GetAllInclude();
 
-            // Áp dụng điều kiện lọc
-            query = query.Where(x => x.CategoryId == pRequest.CategoryId);
+            query = query.Where(x => x.CategoryId == pRequest.CategoryId && x.IsDeleted == false);
 
             int totalCount = await query.CountAsync();
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            query = query.GroupBy(x => x.Name).Select(group => new Product
+            {
+                Name = group.Key,
+                Id = group.FirstOrDefault().Id,
+                InternalCode = group.FirstOrDefault().InternalCode,
+                Images = group.FirstOrDefault().Images,
+                Quantity = group.FirstOrDefault().Quantity,
+                Price = group.FirstOrDefault().Price,
+            });
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             // Áp dụng phân trang
             query = query.Skip((int)((pRequest.Page - 1) * pRequest.PageSize))

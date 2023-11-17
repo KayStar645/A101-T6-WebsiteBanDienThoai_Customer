@@ -25,5 +25,7 @@ namespace Domain.Entities
         public Color? Color { get; set; }
 
         public Capacity? Capacity { get; set; }
+
+        public List<PromotionProduct> PromotionProducts { get; set; }
     }
 }

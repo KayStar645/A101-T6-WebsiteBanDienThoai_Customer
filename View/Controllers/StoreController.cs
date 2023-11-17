@@ -60,14 +60,12 @@ namespace View.Controllers
                 ViewData[category.Id.ToString()] = products.Data;
             }
 
-            return PartialView("_ProductDetail");
-
-
             return PartialView("_Home");
         }
 
         public IActionResult ProductDetail(int id)
         {
+            int a = 1;
             return PartialView("_ProductDetail");
         }
     }

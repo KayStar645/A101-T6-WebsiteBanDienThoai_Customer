@@ -14,10 +14,8 @@
 
         public long? Price { get; set; }
 
-        public int? CategoryId { get; set; }
+        public List<ColorDto>? Colors { get; set; }
 
-        public int? ColorId { get; set; }
-
-        public int? CapacityId { get; set; }
+        public List<CapacityDto>? Capacities { get; set; }
     }
 }

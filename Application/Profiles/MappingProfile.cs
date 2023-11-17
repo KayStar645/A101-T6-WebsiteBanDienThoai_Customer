@@ -14,6 +14,10 @@ namespace Application.Profiles
             CreateMap<Product, ProductDto>().ReverseMap();
 
             CreateMap<Category, CategoryDto>().ReverseMap();
+
+            CreateMap<Color, ColorDto>().ReverseMap();
+
+            CreateMap<Capacity, CapacityDto>().ReverseMap();
         }
 
         private class StringToListTypeConverter : ITypeConverter<string, List<string>>
