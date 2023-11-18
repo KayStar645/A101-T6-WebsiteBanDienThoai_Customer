@@ -16,10 +16,12 @@
 
         public long? NewPrice { get; set; }
 
-        public List<ColorDto>? Colors { get; set; }
+        public ColorDto? Color { get; set; }
 
-        public List<CapacityDto>? Capacities { get; set; }
+        public CapacityDto? Capacity { get; set; }
 
-        public PromotionDto Promotion { get; set; }
+        public PromotionDto? Promotion { get; set; }
+
+        public List<SpecificationsDto> Specifications { get; set; }
     }
 }

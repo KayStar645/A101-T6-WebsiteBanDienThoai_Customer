@@ -63,9 +63,11 @@ namespace View.Controllers
             return PartialView("_Home");
         }
 
-        public IActionResult ProductDetail(int id)
+        public async Task<IActionResult> ProductDetail(int id)
         {
-            int a = 1;
+            var result = await _productService.GetDetail(id);
+            ViewData["product"] = result.Data;
+
             return PartialView("_ProductDetail");
         }
     }
