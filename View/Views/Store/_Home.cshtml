@@ -177,10 +177,18 @@
                                                 <div class=" product__info--new relative">
                                                     <p class="product__status">Mới</p>
                                                     <div class="row ali-center jus-center">
-                                                        <img src="@product.Images.FirstOrDefault()" style="width: 280px; height: 280px"  />
+                                                        <img src="@product.Images?.FirstOrDefault()" style="width: 280px; height: 280px"  />
                                                     </div>
-                                                    <p class="product__name">@product.Name</p>
-                                                    <p class="product__price">@($"{product.Price:N0} đ")</p>
+                                                    <p class="product__name">@product.Name @product.Capacity?.Name - @product.Color?.Name</p>
+                                                    @if(product.Promotion != null)
+                                                    {
+                                                        <p class="product__price">Giá cũ: @($"{product.Price:N0} đ")</p>
+                                                    }
+                                                    <p class="product__price">Giá mới: @($"{product.NewPrice:N0} đ")</p>
+                                                    @if(product.Quantity == 0)
+                                                    {
+                                                        <p class="product__price">Hết hàng</p>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>

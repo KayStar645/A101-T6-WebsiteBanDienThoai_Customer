@@ -1,6 +1,8 @@
+@using Domain.DTOs;
 
 @{
     ViewBag.Title = "ProductDetail";
+    var product = ViewData["product"] as ProductDto;
 }
 
 <link href="~/css/product_detail.css" rel="stylesheet" />
@@ -45,41 +47,23 @@
             <div class="product__image">
                 <div id="carouselExampleIndicators" class="carousel slide relative" data-interval="false" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row ali-center jus-center">
-                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-blue-thumbtz-1-650x650.png"  />
+                        @foreach (var image in @product.Images)
+                        {
+                            <div class="carousel-item">
+                                <div class="row ali-center jus-center">
+                                    <img src="@image" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row ali-center jus-center">
-                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-xanh-duong-1-650x650.jpg"  />
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row ali-center jus-center">
-                                <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-xanh-duong-2-650x650.jpg"  />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <i class="fa-solid fa-arrow-left circle-btn absolute"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <i class="fa-solid fa-arrow-right circle-btn absolute"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
+                        }
                     </div>
 
                     <ol class="carousel-indicators dot__list row jus-center ali-center p-t-16 p-l-16" style="transform: initial; width: fit-content">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="dot__index ma-t-8 ma-b-8"
-                            style="background: url('https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-blue-thumbtz-1-650x650.png') center /cover no-repeat">
-                        </li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="dot__index ma-t-8 ma-b-8"
-                            style="background: url('https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-xanh-duong-1-650x650.jpg') center /cover no-repeat">
-                        </li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2" class="dot__index ma-t-8 ma-b-8"
-                            style="background: url('https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/303891/s16/iphone-15-plus-xanh-duong-2-650x650.jpg') center /cover no-repeat">
-                        </li>
+                        @foreach(var image in @product.Images)
+                        {
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="dot__index ma-t-8 ma-b-8"
+                                style="background: url('@image') center /cover no-repeat">
+                            </li>
+                        }
                     </ol>
                 </div>
             </div>
@@ -87,35 +71,33 @@
 
         <div class="h-7 relative">
             <div class="product__detail">
-                <p class="product__count" hidden>1</p>
-                <h1 class="product__name">iPhone 14</h1>
-                <h2 class="product__name product__price p-t-12">12.000.000</h2>
+                <p class="product__count" hidden>@(product.Quantity)</p>
+                @if(product.Quantity == 0)
+                {
+                    <p class="product__count">Hết hàng</p>
+                }
+                <h1 class="product__name">@product.Name @product.Capacity?.Name - @product.Color?.Name</h1>
+                @if (product.Promotion != null)
+                {
+                    <p class="product__price">Giá cũ: @($"{product.Price:N0} đ")</p>
+                }
+                <p class="product__price">Giá mới: @($"{product.NewPrice:N0} đ")</p>
 
+                @if (product.Capacity != null)
+                {
+                    <div class="product__memory detail__part">
+                        <p class="title">Dung lượng: @(product.Capacity?.Name)</p>
+                    </div>
+                }
                 <div class="product__memory detail__part">
-                    <p class="title">Dung lượng</p>
-                    <ul class="row">
-                        <li class="ma-r-12" data-index="0">
-                            <a data-link="/Store/ProductDetail/1" class="product__storage">128 GB</a>
-                        </li>
-                        <li class="ma-r-12" data-index="1">
-                            <a data-link="/Store/ProductDetail/2" class="product__storage">256 GB</a>
-                        </li>
-                        <li class="ma-r-12" data-index="2">
-                            <a data-link="/Store/ProductDetail/3" class="product__storage">512 GB</a>
-                        </li>
-                    </ul>
+                    <p class="title">Màu: @(product.Color?.Name)</p>
                 </div>
 
-                <div class="product__gift p-b-12 detail__part">
-                    <p class="title">Sản phẩm đi kèm</p>
-                    <ul>
-                        @* @{
-                            foreach (var gift in info.SP_PhuKienKems1[index])
-                            {
-                                <li>@gift</li>
-                            }
-                        } *@
-                    </ul>
+                <div class="product__memory detail__part">
+                    @if(product.Promotion != null)
+                    {
+                        <p>Chương trình khuyến mãi: @product.Promotion.Name</p>
+                    }
                 </div>
             </div>
 
@@ -129,7 +111,7 @@
 <div id="support" style="padding-bottom: 120px;">
     <div class="grid wide">
         <div class="suggest-product">
-            <h2 class="title">Phụ kiện nên có cho iPhone 14</h2>
+            <h2 class="title">Phụ kiện nên có cho @(product.Name)</h2>
         </div>
 
         @* <div class="product__list">
@@ -254,32 +236,24 @@
             <div class="row ali-center jus-center" style="font-size: 2rem; font-weight: 500; padding-bottom: 20px">Thông số kỹ thuật</div>
 
             <div class="row ali-center jus-center">
-                <div style="width: 500px;" class="parent">
-                    <div class="row ali-center jus-between toggle" style="background-color: #f5f5f7; padding: 16px 10px; border-radius: 5px; cursor: pointer;">
-                        <p style="font-size: 1.6rem; font-weight: 500; color: #000">Màn hình</p>
-
-                        <img src="~/icon/ic_minus.png" class="icon" style="width: 20px;" />
+                @foreach(var specification in product.Specifications)
+                {
+                    <div style="width: 500px;" class="parent">
+                        <div class="row ali-center jus-between toggle" style="background-color: #f5f5f7; padding: 16px 10px; border-radius: 5px; cursor: pointer;">
+                            <p style="font-size: 1.6rem; font-weight: 500; color: #000">@specification.Name</p>
+                            <img src="~/icon/ic_minus.png" class="icon" style="width: 20px;" />
+                        </div>
+                        @foreach (var detail in specification.Details)
+                        {
+                            <div class="child">
+                                <div class="row ali-center jus-between" style="padding: 16px 8px; border-bottom: 1px solid #ddd;">
+                                    <p style="font-size: 1.6rem; font-weight: 400; color: #000">@detail.Name</p>
+                                    <p style="font-size: 1.6rem; font-weight: 400; color: #000">@detail.Description</p>
+                                </div>
+                            </div>
+                        }
                     </div>
-
-                    <div class="child">
-                        <div class="row ali-center jus-between" style="padding: 16px 8px; border-bottom: 1px solid #ddd;">
-                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">Công nghệ màn hình</p>
-                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">OLED</p>
-                        </div>
-                        <div class="row ali-center jus-between" style="padding: 16px 8px; border-bottom: 1px solid #ddd;">
-                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">Công nghệ màn hình</p>
-                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">OLED</p>
-                        </div>
-                        <div class="row ali-center jus-between" style="padding: 16px 8px; border-bottom: 1px solid #ddd;">
-                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">Công nghệ màn hình</p>
-                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">OLED</p>
-                        </div>
-                        <div class="row ali-center jus-between" style="padding: 16px 8px; border-bottom: 1px solid #ddd;">
-                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">Công nghệ màn hình</p>
-                            <p style="font-size: 1.6rem; font-weight: 400; color: #000">OLED</p>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

@@ -7,5 +7,7 @@ namespace Application.Interfaces.Services
     public interface IProductService
     {
         Task<PaginatedResult<List<ProductDto>>> GetAll(ListProductRequest pRequest);
+
+        Task<Result<ProductDto>> GetDetail(int pId);
     }
 }

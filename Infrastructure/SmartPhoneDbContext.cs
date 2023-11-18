@@ -22,5 +22,9 @@ namespace Infrastructure
 
         public DbSet<Color> Color { get; set; }
 
+        public DbSet<PromotionProduct> PromotionProduct { get; set; }
+
+        public DbSet<Promotion> Promotion { get; set; }
+
     }
 }

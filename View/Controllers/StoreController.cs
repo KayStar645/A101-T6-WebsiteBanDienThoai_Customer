@@ -35,7 +35,7 @@ namespace View.Controllers
                 listProductRequest.CategoryId = category.Id;
                 var products = await _productService.GetAll(listProductRequest);
 
-                ViewData[category.Id.ToString()] = categoriesResult.Data;
+                ViewData[category.Id.ToString()] = products.Data;
             }
 
             return PartialView("_Layout");
@@ -60,14 +60,14 @@ namespace View.Controllers
                 ViewData[category.Id.ToString()] = products.Data;
             }
 
-            return PartialView("_ProductDetail");
-
-
             return PartialView("_Home");
         }
 
-        public IActionResult ProductDetail(int id)
+        public async Task<IActionResult> ProductDetail(int id)
         {
+            var result = await _productService.GetDetail(id);
+            ViewData["product"] = result.Data;
+
             return PartialView("_ProductDetail");
         }
     }

@@ -14,10 +14,14 @@
 
         public long? Price { get; set; }
 
-        public int? CategoryId { get; set; }
+        public long? NewPrice { get; set; }
 
-        public int? ColorId { get; set; }
+        public ColorDto? Color { get; set; }
 
-        public int? CapacityId { get; set; }
+        public CapacityDto? Capacity { get; set; }
+
+        public PromotionDto? Promotion { get; set; }
+
+        public List<SpecificationsDto> Specifications { get; set; }
     }
 }
