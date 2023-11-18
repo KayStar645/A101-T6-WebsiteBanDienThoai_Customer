@@ -14,13 +14,15 @@ namespace Domain.Entities
 
         public long? Price { get; set; }
 
+        public long? NewPrice { get; set; }
+
         public int? CategoryId { get; set; }
 
         public int? ColorId { get; set; }
 
         public int? CapacityId { get; set; }
 
-        public Category? Category { get; set; }
+        public Promotion? Category { get; set; }
 
         public Color? Color { get; set; }
 

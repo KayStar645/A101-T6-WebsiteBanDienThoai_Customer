@@ -1,9 +1,9 @@
-﻿using Domain.Common;
-
-namespace Domain.Entities
+﻿namespace Domain.DTOs
 {
-    public class Promotion : Entity
+    public class PromotionDto
     {
+        public int Id { get; set; }
+
         public string? InternalCode { get; set; }
 
         public string? Name { get; set; }
@@ -23,7 +23,5 @@ namespace Domain.Entities
         public string? Type { get; set; }
 
         public string? Status { get; set; }
-
-        public List<PromotionProduct> PromotionProducts { get; set; }
     }
 }
