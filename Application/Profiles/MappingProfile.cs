@@ -1,5 +1,5 @@
-﻿using Domain.DTOs;
-using AutoMapper;
+﻿using AutoMapper;
+using Domain.DTOs;
 using Domain.Entities;
 
 namespace Application.Profiles
@@ -48,9 +48,15 @@ namespace Application.Profiles
 
             CreateMap<Promotion, PromotionDto>().ReverseMap();
 
-            CreateMap<Specifications, SpecificationsDto>().ReverseMap(); // Cần sửa đổi nè
+            CreateMap<Specifications, SpecificationsDto>().ReverseMap();
 
             CreateMap<DetailSpecifications, DetailSpecificationsDto>().ReverseMap();
+
+            CreateMap<Order, OrderDto>().ReverseMap();
+
+            CreateMap<DetailOrder, DetailOrderDto>().ReverseMap();
+
+            CreateMap<Customer, CustomerDto>().ReverseMap();
         }
 
         private class StringToListTypeConverter : ITypeConverter<string, List<string>>
