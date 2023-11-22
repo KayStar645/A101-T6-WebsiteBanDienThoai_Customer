@@ -6,15 +6,18 @@
 	left: 0;
 	right: 0;
 	z-index: 99;
+	height: 60px;
 }
 
 .header__logo img {
-	width: 100px;
+	width: 103px;
+	height: 35px;
 }
 
 .header__navbar .nav__item {
 	color: var(--white);
-	padding: 24px;
+	padding: 0 24px;
+	height: 100%;
 	cursor: pointer;
 }
 
@@ -254,16 +257,8 @@ a:hover {
 	color: #fff;
 }
 
-.header__navbar .nav__item {
-	padding: 28px;
-}
-
 .header__navbar .nav__item.active {
 	background: #2d2d2d;
-}
-
-#header {
-	height: 80px;
 }
 
 a.user__cart p.active {
@@ -354,9 +349,9 @@ a.user__cart p.active {
 }
 
 .circle-btn {
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
 	font-size: 1.3rem;
 }
 

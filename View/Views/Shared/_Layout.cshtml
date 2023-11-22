@@ -36,10 +36,6 @@
         margin: 0;
     }
 
-    .header__logo img {
-        width: 150px;
-    }
-
     .user__cart.relative .product__count {
         position: absolute;
     }
@@ -67,25 +63,26 @@
             <div class="relative h-100">
                 <div class="row ali-center h-100 header__body relative">
                     <div class="h-2 order2 header__logo">
-                        <div class="">
+                        <div class="d-flex align-items-center" style="gap: 12px">
                             <p data-link="/Store/Home" data-type="Home" data-can-render="true" class="nav__item active">
-                                <img src="~/image/home/logo.png" />
+                                <img src="~/image/logo.png" />
                             </p>
+                            <img style="width: 32px; height: 40px" src="~/image/apple_logo.webp" />
                         </div>
                     </div>
 
                     <div class="h-8 order1 header__navbar h-100">
-                        <div class="">
+                        <div class="h-100">
                             <div class="h-0 m-0 l-0 s-2">
                                 <i class="fa-solid fa-bars"></i>
                             </div>
-                            <div class="s-0 row ali-center jus-center w-100">
+                            <div class="s-0 row ali-center jus-center w-100 h-100">
                                 @if (categories != null)
                                 {
                                     foreach (var category in categories)
                                     {
-                                        <div class="">
-                                            <p data-link="/Store/Phone" data-type="Phone" data-can-render="true" class="nav__item">@category.Name</p>
+                                        <div class="h-100 d-flex align-items-center justify-content-center nav__item" data-link="/Store/Category/@category.Id" data-type="Phone" data-can-render="true">
+                                            <p>@category.Name</p>
                                         </div>
                                     }
                                 }

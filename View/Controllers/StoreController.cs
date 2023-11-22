@@ -70,5 +70,19 @@ namespace View.Controllers
 
             return PartialView("_ProductDetail");
         }
+
+        public async Task<IActionResult> Category(int id)
+        {
+            var listProductRequest = new ListProductRequest
+            {
+                Page = 1,
+                CategoryId = id
+            };
+            var products = await _productService.GetAll(listProductRequest);
+
+            ViewData["products"] = products.Data;
+
+            return PartialView("_ProductByCategory");
+        }
     }
 }
