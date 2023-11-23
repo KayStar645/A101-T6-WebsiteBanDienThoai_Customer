@@ -1,0 +1,473 @@
+@{
+    ViewBag.Title = "Cart";
+}
+
+<style>
+    label {
+        margin: 0;
+    }
+
+    body {
+        background: #f0f0f0 !important;
+    }
+
+    #content {
+        padding-top: 80px;
+        background: #f0f0f0 !important;
+    }
+
+    #footer {
+        display: none;
+    }
+
+    div.user__cart {
+        width: 600px;
+        margin: 0 auto;
+    }
+
+    .detail__cart {
+        padding: 12px 24px;
+    }
+
+    .product__info {
+        background: transparent;
+        padding: 16px 0;
+        margin: 0;
+        border-radius: 0;
+        border-bottom: 2px solid #ddd;
+    }
+
+        .product__info:hover {
+            box-shadow: none;
+        }
+
+    .detail__cart {
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        border-radius: 15px;
+    }
+
+    .cart__title p {
+        text-align: right;
+        font-size: 1.4rem;
+        margin-right: 12px;
+        margin-bottom: 12px;
+    }
+
+    .product__price {
+        font-weight: bold;
+        padding: 0;
+        color: #000;
+        font-size: 1.5rem;
+    }
+
+    .product__info img {
+        margin: 0;
+    }
+
+    .remove__product p {
+        border: 1px solid #ddd;
+        background: #fafafb;
+        font-size: 1.2rem;
+        color: #9e9e9f;
+        padding: 0 8px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .remove__product button:active {
+        opacity: 0.7;
+    }
+
+    .product__count i,
+    .product__count p {
+        border-radius: 4px;
+        border: 1px solid #e5e5e5;
+        width: 24px;
+        height: 24px;
+        font-size: 1rem;
+        text-align: center;
+        line-height: 24px;
+        color: #ccc;
+        cursor: not-allowed;
+    }
+
+        .product__count i.active {
+            color: #000;
+            cursor: pointer;
+        }
+
+        .product__count i:active {
+            opacity: 0.7;
+        }
+
+    .product__count p {
+        margin: 0 4px;
+        font-size: 1.3rem;
+        background: #ddd;
+        color: #000;
+    }
+
+    .product__total {
+        font-weight: bold;
+    }
+
+        .product__total span {
+            font-weight: initial;
+        }
+
+    .product__list {
+        margin: 0;
+    }
+
+    .product__info:last-child {
+        border: none;
+    }
+
+    .customer__info {
+        border-top: 4px solid #e5e5e5;
+        border-bottom: 4px solid #e5e5e5;
+        margin: 0 -24px;
+        padding: 12px 24px;
+    }
+
+    .detail__cart .title {
+        font-weight: bold;
+        padding-bottom: 8px;
+        font-size: 1.4rem;
+    }
+
+    .customer__info input[type=radio] {
+        margin-bottom: 16px;
+    }
+
+    .detail__cart .product__buy {
+        position: initial;
+        margin: 0;
+        margin-top: 12px;
+    }
+
+    .cart__name {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+</style>
+
+<div class="grid wide p-t-24">
+    <div class="user__cart">
+        <div class="cart__title">
+            <p>Giỏ hàng của bạn</p>
+        </div>
+
+        <div class="detail__cart">
+            <div class="forsure">
+                <form action="" method="post" id="user__form">
+                    <div class="product__list">
+
+                    </div>
+
+                    <div class="customer__info">
+                        <p class="title">Thông tin khách hàng</p>
+
+                        <div class="forsure">
+                            <div class="form__group">
+                                <div class="row ali-center">
+                                    <div class="h-3">
+                                        <label class="gender__label relative">
+                                            Anh
+                                            <input type="radio" name="KH_GIOITINH" rule="required" value="True" class="form__control">
+                                            <div class="checkbox"></div>
+                                        </label>
+                                    </div>
+                                    <div class="h-3">
+                                        <label class="gender__label relative">
+                                            Chị
+                                            <input type="radio" name="KH_GIOITINH" rule="required" value="False" class="form__control">
+                                            <div class="checkbox"></div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <span class="form__warning ma-t-8"></span>
+                            </div>
+
+                            <div class="row p-t-16">
+                                <div class="h-6 p-r-16">
+                                    <div class="form__group relative form__item">
+                                        <label for="fullname">Họ và tên</label>
+                                        <input type="text" name="KH_TEN" rule="required|fullname" id="fullname" class="form__control" placeholder="">
+                                        <span class="form__warning"></span>
+                                    </div>
+                                </div>
+                                <div class="h-6">
+                                    <div class="form__group relative form__item">
+                                        <label for="phone_number">Số điện thoại</label>
+                                        <input type="text" name="KH_SDT" rule="required|phoneNumber" id="phone_number" class="form__control" placeholder="">
+                                        <span class="form__warning"></span>
+                                    </div>
+                                </div>
+                                <div class="h-12 p-t-16">
+                                    <div class="form__group relative form__item ">
+                                        <label for="address">Địa chỉ</label>
+                                        <input type="text" name="KH_DIACHI" rule="required" id="address" class="form__control" placeholder="">
+                                        <span class="form__warning"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ali-center jus-between p-t-12">
+                        <p class="product__total title">Tổng tiền<span>(0 sản phẩm):</span></p>
+
+                        <div class="product__price products__price">
+                            <p>0đ</p>
+                            <input type="text" name="PX_TONGTIEN" value="0" hidden />
+                        </div>
+                    </div>
+
+                    <div class="product__buy confirm-btn detail">
+                        <button data-link="/Store/UpdatePhieuXuat">Đặt hàng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //User cart
+    //var validateResult = new Validate("#user__form");
+    var userCart = JSON.parse(localStorage.getItem("user_cart")) || [];
+    var userForm = $("#user__form");
+    var inputs = $("#user__form input[type='text']");
+    var userName = $("#fullname").get(0);
+    var userPhone = $("#phone_number").get(0);
+    var userAddress = $("#address").get(0);
+    var userGenderNam = $("input[name = KH_GIOITINH]").get(0);
+    var userGenderNu = $("input[name = KH_GIOITINH]").get(1);
+    var buyBtn = $(".confirm-btn button");
+    @* var form = new Validate("#user__form"); *@
+    var customerInfo = $("#user__form .customer__info").get(0)
+
+    buyBtn.click(e => {
+        form.onSubmit = function (value) {
+            if (Object.keys(value).length === 4) {
+                var productInfos = $(".product__info");
+
+                var orderDetail = {
+                    products: [],
+                    customer: {},
+                };
+
+                Array.from(productInfos).forEach(productInfo => {
+                    orderDetail.products.push({
+                        id: productInfo.querySelector("input[name=SP_Ma]").value,
+                        quantity: productInfo.querySelector("input[name=SP_SOLUONG]").value
+                    });
+                });
+                orderDetail.customer.gender = customerInfo.querySelector("input[name=KH_GIOITINH]:checked").value;
+                orderDetail.customer.name = customerInfo.querySelector("input[name=KH_TEN]").value;
+                orderDetail.customer.phone = customerInfo.querySelector("input[name=KH_SDT]").value;
+                orderDetail.customer.address = customerInfo.querySelector("input[name=KH_DIACHI]").value;
+
+                orderDetail = JSON.stringify(orderDetail)
+
+                $.ajax({
+                    url: "/Store/UpdatePhieuXuat",
+                    data: `orderDetail=${orderDetail}`,
+                    success: function (result) {
+                        localStorage.removeItem("user_cart");
+                        $("#content").html(result)
+                        productCount.removeClass("active");
+                        productCount.html("");
+                    }
+                });
+
+                //orderDetail = JSON.stringify(orderDetail);
+
+                //$.ajax({
+                //    contentType: 'application/json; charset=utf-8',
+                //    dataType: 'json',
+                //    type: 'post',
+                //    url: "/Store/UpdatePhieuXuat",
+                //    data: orderDetail,
+                //    success: function (response) {
+                //        console.log(response)
+                //    },
+                //    error: function (response) {
+                //        if (response.status === 200) {
+                //            localStorage.removeItem("user_cart");
+
+                //            $.ajax({
+                //                url: "/Store/UserCart",
+                //                success: function (result) {
+                //                    $("#content").html(result)
+                //                    productCount.removeClass("active");
+                //                    productCount.html("");
+                //                }
+                //            });
+                //        }
+                //    }
+                //});
+            }
+        }
+    });
+
+    if (userCart && userCart.length > 0) {
+        var productsPrice = $(".products__price p");
+        var productsPrice2 = $(".products__price input");
+        var productList = $(".product__list");
+        var length = userCart.length;
+        var price = 0;
+        var productTotal = $(".product__total span");
+
+
+        //=======================================================================
+        userCart.forEach((product, index) => {
+            var html = CreateProductInfo(product);
+            var listItem = document.createElement("div");
+
+            listItem.classList.add("product__info");
+            listItem.dataset.index = index;
+
+            listItem.innerHTML = html;
+            productList.append(listItem);
+            price += (product.price * product.number);
+        });
+
+        productList.click((e) => {
+            var decreaseBtn = e.target.closest(".product__count .fa-minus.active");
+            var increaseBtn = e.target.closest(".product__count .fa-plus.active");
+            var removeBtn = e.target.closest(".remove__product p");
+
+            if (decreaseBtn) {
+                var decreaseNumber = decreaseBtn.parentElement.querySelector("p");
+                var decreaseNumber2 = decreaseBtn.parentElement.querySelector("input");
+                var number = parseInt(decreaseNumber.innerText) - 1;
+                var index = parseInt(getParentElement(e.target, ".product__info").dataset.index);
+
+                if (number == 0) {
+                    decreaseBtn.parentElement.querySelector(".product__count .fa-minus").classList.remove("active");
+                }
+                else {
+                    decreaseNumber.innerText = number;
+                    decreaseNumber2.value = number;
+                    userCart[index].number = number;
+
+                    SetPrice();
+                }
+            }
+
+            if (increaseBtn) {
+                var increaseNumber = increaseBtn.parentElement.querySelector("p");
+                var increaseNumber2 = increaseBtn.parentElement.querySelector("input");
+                var number = parseInt(increaseNumber.innerText) + 1;
+                var index = parseInt(getParentElement(e.target, ".product__info").dataset.index);
+
+                increaseNumber.innerText = number;
+                increaseNumber2.value = number;
+                userCart[index].number = number;
+
+                increaseBtn.parentElement.querySelector(".product__count .fa-minus").classList.add("active");
+                SetPrice();
+            }
+
+            if (removeBtn) {
+                var parent = getParentElement(e.target, ".product__info");
+                var name = parent.querySelector(".cart__name");
+                var index = GetIndex(userCart, name.innerText);
+
+                userCart.splice(index, 1);
+                parent.remove();
+                SetPrice();
+
+                if (userCart.length == 0) {
+                    productCount.removeClass("active");
+                }
+            }
+
+        });
+
+        productsPrice.text(AddCommas(price));
+        productsPrice2.value = DeleteCommas(productsPrice.text());
+        productTotal.text(`(${TotalProduct(userCart)} sản phẩm):`);
+    }
+
+    var inputs = $("#user__form input[type='text']");
+    var userDetail = JSON.parse(localStorage.getItem("user_info")) || {};
+
+    if (Array.from(inputs).length > 0) {
+        userName.addEventListener("input", (e) => {
+            userDetail.name = userName.value;
+
+            localStorage.setItem("user_info", JSON.stringify(userDetail));
+        });
+
+        userPhone.addEventListener("input", (e) => {
+            userDetail.phone = userPhone.value;
+
+            localStorage.setItem("user_info", JSON.stringify(userDetail));
+        });
+
+        userAddress ? userAddress.addEventListener("input", (e) => {
+            userDetail.address = userAddress.value;
+
+            localStorage.setItem("user_info", JSON.stringify(userDetail));
+        }) : null;
+
+        userGenderNam.addEventListener("input", (e) => {
+            if (userGenderNam.checked) {
+                userDetail.gender = "Nam";
+
+                localStorage.setItem("user_info", JSON.stringify(userDetail));
+            }
+        });
+
+        userGenderNu.addEventListener("input", (e) => {
+            if (userGenderNu.checked) {
+                userDetail.gender = "Nữ";
+
+                localStorage.setItem("user_info", JSON.stringify(userDetail));
+            }
+        });
+
+        if (Object.keys(userDetail).length > 0) {
+            userDetail.gender === "Nam" && userDetail.gender ? userGenderNam.checked = true : userGenderNu.checked = true;
+            userDetail.phone ? userPhone.value = userDetail.phone : userPhone.value = "";
+            userDetail.name ? userName.value = userDetail.name : userName.value = "";
+            userAddress ? userDetail.address ? userAddress.value = userDetail.address : userAddress.value = "" : null;
+        }
+
+        //=======================================================================
+        Array.from(inputs).forEach(input => {
+            input.addEventListener("click", (e) => {
+                var parentInput = getParentElement(e.target, ".form__item");
+
+                parentInput.classList.add("active");
+                parentInput.classList.replace("non-active", "active");
+            });
+
+            input.addEventListener("blur", (e) => {
+                var parentInput = getParentElement(e.target, ".form__item");
+                var text = parentInput.querySelector("input").value;
+
+                if (text.trim() == "") {
+                    parentInput.classList.replace("active", "non-active");
+                }
+                else {
+                    parentInput.classList.add("success");
+                }
+            });
+
+            if (input.value !== "") {
+                var parent = getParentElement(input, ".form__group");
+
+                if (parent) {
+                    parent.classList.add("active", "success");
+                }
+            }
+        });
+    }
+</script>
