@@ -21,7 +21,7 @@
     #content {
         height: auto;
         min-height: auto;
-    }
+}
 
     .product__detail {
         height: 75vh;
@@ -42,7 +42,7 @@
 </style>
 
 <div class="grid wide p-t-24">
-    <div class="row product__container" style="padding-bottom: 50px;">
+    <div class="row product__container" style="padding-bottom: 94px;">
         <div class="h-5">
             <div class="product__image">
                 <div id="carouselExampleIndicators" class="carousel slide relative" data-interval="false" data-ride="carousel">
@@ -70,32 +70,33 @@
         </div>
 
         <div class="h-7 relative">
-            <div class="product__detail" style="padding-bottom: 20px;">
+            <div>
                 <p class="product__count" hidden>@(product.Quantity)</p>
+                <p class="product_id" hidden data-id="@product.Id" />
                 @if(product.Quantity == 0)
                 {
-                    <p class="product__count">Hết hàng</p>
+                    <p class="sole_out" style="font-size: 1.4rem; color: white; font-weight: 500; background: red; padding: 20px; border-radius: 5px ">Hết hàng</p>
                 }
                 <h1 class="product__name">@product.Name @product.Capacity?.Name - @product.Color?.Name</h1>
                 <div class="mt-3">
                     @if (product.Promotion != null)
                     {
-                        <p style="color: white; font-size: 1.6rem; text-decoration: line-through; font-weight: 500">@($"{product.Price:N0} đ")</p>
+                        <p class="old_price" style="color: white; font-size: 1.6rem; text-decoration: line-through; font-weight: 500">@($"{product.Price:N0} đ")</p>
                     }
-                    <p style="color: white; font-size: 2.2rem; font-weight: 500;">@($"{product.NewPrice:N0} đ")</p>
+                    <p class="product_price" style="color: white; font-size: 2.2rem; font-weight: 500;">@($"{product.NewPrice:N0} đ")</p>
                 </div>
 
                 @if (product.Capacity != null)
                 {
-                    <div class="product__memory detail__part">
-                        <p class="title">Dung lượng: @(product.Capacity?.Name)</p>
+                    <div class="product__memory detail__part mt-3">
+                        <p class="title" style="font-size: 1.5rem; color: white; font-weight: 500">Dung lượng: @(product.Capacity?.Name)</p>
                     </div>
                 }
                 <div class="product__memory detail__part">
-                    <p class="title">Màu: @(product.Color?.Name)</p>
+                    <p class="title" style="font-size: 1.5rem; color: white; font-weight: 500">Màu: @(product.Color?.Name)</p>
                 </div>
 
-                <div class="product__memory detail__part">
+                <div class="product__memory detail__part m-b-3" style="font-size: 1.5rem; color: white; font-weight: 500">
                     @if(product.Promotion != null)
                     {
                         <p>Chương trình khuyến mãi: @product.Promotion.Name</p>
@@ -117,124 +118,6 @@
         <div class="suggest-product">
             <h2 class="title">Phụ kiện nên có cho @(product.Name)</h2>
         </div>
-
-        @* <div class="product__list">
-            <div id="suggest-list" class="carousel slide relative" data-interval="false">
-                @foreach (var suggest in suggests)
-                {
-                    <div class="carousel-item">
-                        <div class="row">
-                            @for (int i = 0; i < suggest.Count; i++)
-                            {
-                                var item = suggest[i];
-                                <div class="h-3">
-                                    <a data-link="/Store/ProductDetail/@item.SP_MaDT1[0]?index=0" class="product__info p-b-40 relative">
-                                        <div class=" product__info--new relative row flex-column ali-center">
-                                            <img src="~/Assets/Image/Product/@item.SP_AnhDT1[0][0]" class="p-b-40" />
-                                            <p class="product__name">@item.SP_Ten</p>
-                                            <p class="product__price">@item.SP_GiaBans1[0]</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                }
-
-                <a class="carousel-control-prev" href="#suggest-list" role="button" data-slide="prev">
-                    <i class="fa-solid fa-arrow-left circle-btn absolute" style="left: 0"></i>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#suggest-list" role="button" data-slide="next">
-                    <i class="fa-solid fa-arrow-right circle-btn absolute" style="right: 0"></i>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div> *@
-
-        @* <div id="comment">
-            <div class="product__comment relative not-active">
-                <h2 class="title">Hỏi đáp về  iPhone 14</h2>
-
-                <div class="add-comment">
-                    <form action="/Store/AddComment" method="get" class="relative h-100 form__comment" id="user__form">
-                        <input type="text" name="MASP" hidden value="@id" />
-                        <textarea name="BL_NOIDUNG" placeholder="Mời anh/chị bình luận hoặc đặt câu hỏi"></textarea>
-
-                        <div class="user__account">
-                            <div class="account__info row">
-                                <div class="h-12 p-b-16 p-l-8 p-r-8">
-                                    <div class="form__group">
-                                        <div class="row ali-center">
-                                            <div class="h-2">
-                                                <label class="gender__label relative">
-                                                    Anh
-                                                    <input type="radio" name="KH_GIOITINH" rule="required" value="True" class="form__control">
-                                                    <div class="checkbox"></div>
-                                                </label>
-                                            </div>
-                                            <div class="h-2">
-                                                <label class="gender__label relative">
-                                                    Chị
-                                                    <input type="radio" name="KH_GIOITINH" rule="required" value="False" class="form__control">
-                                                    <div class="checkbox"></div>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <span class="form__warning ma-t-8"></span>
-                                    </div>
-                                </div>
-
-                                <div class="h-6 p-l-8 p-r-8">
-                                    <div class="form__group relative form__item">
-                                        <label for="fullname">Họ và tên <span style="color: red; vertical-align: middle">*</span></label>
-                                        <input type="text" name="KH_TEN" rule="required|fullname" id="fullname" class="form__control" placeholder="" value="">
-                                        <span class="form__warning"></span>
-                                    </div>
-                                </div>
-
-                                <div class="h-6 p-l-8 p-r-8">
-                                    <div class="form__group relative form__item">
-                                        <label for="phone_number">Số điện thoại <span style="color: red; vertical-align: middle">*</span></label>
-                                        <input type="text" name="KH_SDT" rule="required|phoneNumber" id="phone_number" class="form__control" placeholder="">
-                                        <span class="form__warning"></span>
-                                    </div>
-                                </div>
-
-                                <div class="h-6 p-t-16 p-l-8 p-r-8">
-                                    <div class="form__group relative form__item">
-                                        <label for="phone_number">Địa chỉ</label>
-                                        <input type="text" name="KH_DIACHI" id="address" class="form__control" placeholder="">
-                                        <span class="form__warning"></span>
-                                    </div>
-                                </div>
-
-                                <div class="h-6 p-t-16 p-l-8 p-r-8">
-                                    <div class="form__group relative form__item">
-                                        <button type="submit">GỬI</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </form>
-                </div>
-
-                <div class="comment__container relative">
-                    <div class="forsure">
-                        <div class="comment__list">
-                            @{
-                                if (comments != null)
-                                {
-                                    @Html.Partial("CommentPartial", comments, new ViewDataDictionary { { "id", info.SP_MaDT1[index] } });
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> *@
 
         <div class="forsure" style="padding-top: 40px;">
             <div class="row ali-center jus-center" style="font-size: 2rem; font-weight: 500; padding-bottom: 20px">Thông số kỹ thuật</div>
@@ -268,7 +151,8 @@
     var productParameter = $(".product__parameter");
     var buyBtn = $(".product__buy.detail button");
     var productName = $(".product__name").first();
-    var productPrice = $(".product__price");
+    var productPrice = $(".product_price");
+    var oldPrice = $(".old_price");
     var productImage = $(".product__image img");
     var headerNotiy = $(".header__notify");
     var ImagecarouselItem = $(".product__image .carousel-item").first();
@@ -425,7 +309,7 @@
     });
 
     var productMemory = $(".product__memory li.active");
-    var productId = $(".product__memory li.active a");
+    var productId = $(".product_id");
 
     productParameter.click((e) => {
         if (e.target.closest(".arrow__list")) {
@@ -438,12 +322,12 @@
         var userCart = JSON.parse(localStorage.getItem("user_cart")) || [];
 
         var info = {
-            "id": productId.data("id") || $(".product__detail input").first().val(),
+            "id": productId.data("id"),
             "name": productName.text() + " " + (productMemory.text() ? productMemory.text() : ""),
             "price": parseInt(DeleteCommas(productPrice.text())),
             "number": 1,
             "image": productImage.attr('src'),
-            "maxTotal": productLeft.text()
+            "oldPrice": oldPrice ? parseInt(DeleteCommas(oldPrice.text())) : 0
         };
 
 

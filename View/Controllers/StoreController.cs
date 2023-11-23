@@ -84,5 +84,10 @@ namespace View.Controllers
 
             return PartialView("_ProductByCategory");
         }
+
+        public IActionResult Cart()
+        {
+            return PartialView("_Cart");
+        }
     }
 }

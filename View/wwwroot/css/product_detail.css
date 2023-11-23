@@ -131,10 +131,6 @@ h2.product__name {
 	border-radius: 5px;
 }
 
-.product__buy {
-	position: initial;
-}
-
 .product__buy:active {
 	opacity: 1;
 	outline: none;
