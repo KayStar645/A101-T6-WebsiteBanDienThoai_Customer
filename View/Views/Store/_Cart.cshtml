@@ -37,13 +37,13 @@
         border-bottom: 2px solid #ddd;
     }
 
-        .product__info:hover {
-            box-shadow: none;
-        }
+    .product__info:hover {
+        box-shadow: none;
+    }
 
     .detail__cart {
         background: #fff;
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         border-radius: 15px;
     }
 
@@ -93,14 +93,14 @@
         cursor: not-allowed;
     }
 
-        .product__count i.active {
-            color: #000;
-            cursor: pointer;
-        }
+    .product__count i.active {
+        color: #000;
+        cursor: pointer;
+    }
 
-        .product__count i:active {
-            opacity: 0.7;
-        }
+    .product__count i:active {
+        opacity: 0.7;
+    }
 
     .product__count p {
         margin: 0 4px;
@@ -113,9 +113,9 @@
         font-weight: bold;
     }
 
-        .product__total span {
-            font-weight: initial;
-        }
+    .product__total span {
+        font-weight: initial;
+    }
 
     .product__list {
         margin: 0;
@@ -163,8 +163,48 @@
         <div class="detail__cart">
             <div class="forsure">
                 <form action="" method="post" id="user__form">
-                    <div class="product__list">
+                    <div class="product__list" style="padding-bottom: 16px;">
+                        <input name="SP_Ma" value="${info.id}" hidden>
+                        <div class="row">
+                            <div class="h-2">
+                                <div class="forsure">
+                                    <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/281570/s16/iphone-15-black-thumbtz_0-650x650.png"
+                                        style="width: 100px;" />
+                                    <div class="remove__product text-center ma-t-12">
+                                        <p>Xóa</p>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="h-7">
+                                <div class="p-l-12">
+                                    <p class="cart__name">14 ProMax 512GB Xanh đen</p>
+                                </div>
+                            </div>
+
+                            <div class="h-3">
+                                <div class="row flex-column ali-end jus-between h-100">
+                                    <div>
+                                        <div class="product__price">
+                                            <p style="text-align: right">14.000.000đ</p>
+                                        </div>
+                                        <p
+                                            style="font-size: 1.35rem; text-decoration: line-through; color: #8f8f8f; text-align: right">
+                                            14.000.000đ</p>
+                                    </div>
+
+                                    <div class="forsure">
+                                        <div class="row ali-center product__count">
+                                            <i class="fa-solid fa-minus active"></i>
+                                            <p>1</p>
+
+                                            <input name="SP_SOLUONG" value="${info.number}" hidden>
+                                            <i class="fa-solid fa-plus active"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="customer__info">
@@ -176,14 +216,16 @@
                                     <div class="h-3">
                                         <label class="gender__label relative">
                                             Anh
-                                            <input type="radio" name="KH_GIOITINH" rule="required" value="True" class="form__control">
+                                            <input type="radio" name="KH_GIOITINH" rule="required" value="True"
+                                                class="form__control">
                                             <div class="checkbox"></div>
                                         </label>
                                     </div>
                                     <div class="h-3">
                                         <label class="gender__label relative">
                                             Chị
-                                            <input type="radio" name="KH_GIOITINH" rule="required" value="False" class="form__control">
+                                            <input type="radio" name="KH_GIOITINH" rule="required" value="False"
+                                                class="form__control">
                                             <div class="checkbox"></div>
                                         </label>
                                     </div>
@@ -196,21 +238,24 @@
                                 <div class="h-6 p-r-16">
                                     <div class="form__group relative form__item">
                                         <label for="fullname">Họ và tên</label>
-                                        <input type="text" name="KH_TEN" rule="required|fullname" id="fullname" class="form__control" placeholder="">
+                                        <input type="text" name="KH_TEN" rule="required|fullname" id="fullname"
+                                            class="form__control" placeholder="">
                                         <span class="form__warning"></span>
                                     </div>
                                 </div>
                                 <div class="h-6">
                                     <div class="form__group relative form__item">
                                         <label for="phone_number">Số điện thoại</label>
-                                        <input type="text" name="KH_SDT" rule="required|phoneNumber" id="phone_number" class="form__control" placeholder="">
+                                        <input type="text" name="KH_SDT" rule="required|phoneNumber" id="phone_number"
+                                            class="form__control" placeholder="">
                                         <span class="form__warning"></span>
                                     </div>
                                 </div>
                                 <div class="h-12 p-t-16">
                                     <div class="form__group relative form__item ">
                                         <label for="address">Địa chỉ</label>
-                                        <input type="text" name="KH_DIACHI" rule="required" id="address" class="form__control" placeholder="">
+                                        <input type="text" name="KH_DIACHI" rule="required" id="address"
+                                            class="form__control" placeholder="">
                                         <span class="form__warning"></span>
                                     </div>
                                 </div>
