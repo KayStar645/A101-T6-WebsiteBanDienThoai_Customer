@@ -89,5 +89,10 @@ namespace View.Controllers
         {
             return PartialView("_Cart");
         }
+
+        public IActionResult Order()
+        {
+            return PartialView("_Order");
+        }
     }
 }
