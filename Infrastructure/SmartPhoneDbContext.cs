@@ -26,5 +26,11 @@ namespace Infrastructure
 
         public DbSet<Promotion> Promotion { get; set; }
 
+        public DbSet<Order> Order { get; set; }
+
+        public DbSet<DetailOrder> DetailOrder { get; set; }
+
+        public DbSet<Customer> Customer { get; set; }
+
     }
 }

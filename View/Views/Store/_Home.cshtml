@@ -164,7 +164,9 @@
                 @if (((List<ProductDto>)ViewData[category.Id.ToString()]).Count != 0)
                 {
                     <div class="text-center" style="padding: 40px 0;">
-                        <p style="font-size: 3rem; color: #fff; font-weight: 600;">@category.Name</p>
+                        <p style="font-size: 3rem; color: #fff; font-weight: 600;"
+                        >@category.Name
+                        </p>
                     </div>
                     <div class="row relative w-100 flex-lg-nowrap">
                         @foreach (ProductDto product in (List<ProductDto>)ViewData[category.Id.ToString()])
@@ -173,7 +175,7 @@
                                 <div id="product1" class="carousel slide carousel-fade" data-interval="false">
                                     <div class="carousel-inner relative">
                                         <div class="carousel-item">
-                                            <div data-link="/Store/ProductDetail/@product.Id" class="product__info p-b-40 relative">
+                                            <a href="https://localhost:7254/Store/ProductDetail?id=@product.Id" class="product__info p-b-40 relative">
                                                 <div class=" product__info--new relative">
                                                     <div class="row ali-center jus-center">
                                                         <img src="@product.Images?.FirstOrDefault()" style="width: 280px; height: 280px"  />
@@ -193,7 +195,7 @@
                                                         }
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -210,39 +212,6 @@
             var productInfos = $(".product__info");
             var categories = $(".category-item");
             var navItems = $(".nav__item");
-
-            Array.from(categories).forEach(category => {
-                category.addEventListener("click", e => {
-                    $.ajax({
-                        url: category.dataset.link,
-                        success: function (result) {
-                            $("#content").html(result);
-                            document.documentElement.scrollTop = 0;
-
-                            Array.from(navItems).forEach(navItem => {
-                                if (navItem.dataset.type === category.dataset.type) {
-                                    document.querySelector(".nav__item.active").classList.remove("active");
-                                    navItem.classList.add("active");
-                                }
-                            });
-                        }
-                    });
-                })
-            });
-
-            Array.from(productInfos).forEach(productInfo => {
-                productInfo.addEventListener("click", e => {
-                    e.preventDefault();
-
-                    $.ajax({
-                        url: productInfo.dataset.link,
-                        success: function (result) {
-                            $("#content").html(result);
-                            document.documentElement.scrollTop = 0;
-                        }
-                    })
-                });
-            });
 
             Array.from(carouselItems).forEach(item => {
                 item.querySelector(".carousel-item").classList.add("active");

@@ -64,9 +64,9 @@
                 <div class="row ali-center h-100 header__body relative">
                     <div class="h-2 order2 header__logo">
                         <div class="d-flex align-items-center" style="gap: 12px">
-                            <p data-link="/Store/Home" data-type="Home" data-can-render="true" class="nav__item active">
+                            <a href="https://localhost:7254" data-type="Home" data-can-render="true" class="nav__item active">
                                 <img src="~/image/logo.png" />
-                            </p>
+                            </a>
                             <img style="width: 32px; height: 40px" src="~/image/apple_logo.webp" />
                         </div>
                     </div>
@@ -81,10 +81,10 @@
                                 {
                                     foreach (var category in categories)
                                     {
-                                        <div class="h-100 d-flex align-items-center justify-content-center nav__item"
-                                            data-link="/Store/Category/@category.Id" data-type="Phone" data-can-render="true">
+                                        <a class="h-100 d-flex align-items-center justify-content-center nav__item"
+                                            href="https://localhost:7254/Store/Category/@category.Id" data-type="Phone" data-can-render="true">
                                             <p>@category.Name</p>
-                                        </div>
+                                        </a>
                                     }
                                 }
                             </div>
@@ -99,7 +99,7 @@
                                         data-can-render="false"></i>
                                 </div>
 
-                                <a class="ma-r-12 nav__item" data-link="/Store/Order" data-can-render="true">
+                                <a class="ma-r-12 nav__item" href="/Store/Order" data-can-render="true">
                                     <i class="fa-solid fa-truck-moving circle-btn"></i>
                                 </a>
 
@@ -132,7 +132,7 @@
         </div>
 
         <div id="content">
-
+            @RenderBody()
         </div>
 
         <div id="footer">
@@ -144,97 +144,6 @@
             </div>
         </div>
     </div>
-    <script>
-        //_Layout
-        var navbar = $(".header__navbar");
-        var productCount = $(".user__cart p").first();
-        var userCart = JSON.parse(localStorage.getItem("user_cart"));
-        var cartBtn = $(".user__cart");
-        var searchBtn = $(".fa-magnifying-glass.circle-btn");
-        var endSearchBtn = $(".fa-solid.fa-xmark");
-        var navItems = $(".nav__item");
-        var formSearch = $(".get__product-name");
-
-        if (userCart && userCart.length > 0) {
-            productCount.addClass("active");
-            productCount.text(TotalProduct(userCart));
-        }
-
-        RenderLayout();
-
-        Array.from(navItems).forEach(navItem => {
-            navItem.addEventListener("click", e => {
-                document.querySelector(".nav__item.active").classList.remove("active");
-
-                navItem.classList.add("active");
-
-                if (navItem.dataset.canRender === "true") {
-                    RenderLayout();
-                    document.documentElement.scrollTop = 0;
-                }
-            });
-        });
-
-        formSearch.submit(e => {
-            e.preventDefault();
-
-            if ($("input[name=SP_TEN]").val() !== "") {
-                $.ajax({
-                    url: "/Store/Search",
-                    data: formSearch.serialize(),
-                    success: function (result) {
-                        $("#content").html(result);
-                        $("#content").css("padding-top", $("#header").height() + "px");
-                        endSearchBtn.click();
-                    }
-                });
-            }
-        });
-
-        cartBtn.click(e => {
-            e.preventDefault();
-
-            $.ajax({
-                url: cartBtn.data("link"),
-                success: function (result) {
-                    $("#content").html(result);
-                    document.documentElement.scrollTop = 0;
-                }
-            });
-        });
-
-        function RenderLayout() {
-            var activeItem = $(".nav__item.active");
-
-            $.ajax({
-                url: activeItem.data("link"),
-                success: function (result) {
-                    $("#content").html(result);
-                    $("#content").css("padding-top", $("#header").height() + "px");
-                }
-            });
-        }
-
-        //====================================================================
-        searchBtn.click((e) => {
-            $("#header").addClass("searching");
-        });
-
-        endSearchBtn.click((e) => {
-            $("#header").removeClass("searching").addClass("not-search");
-        });
-
-        $(".layout").click((e) => {
-            $("#header").removeClass("searching").addClass("not-search");
-        });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <script src="//code.tidio.co/fvewgxhyoymrpmnqgbv64lyherwomvx9.js" async></script>
 </body>
 
 </html>

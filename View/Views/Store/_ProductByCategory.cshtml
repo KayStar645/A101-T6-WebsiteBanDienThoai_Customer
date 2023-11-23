@@ -1,7 +1,9 @@
 @using Core.Application.Responses;
 @using Domain.DTOs;
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var products = ViewData["products"] as List<ProductDto>;
+    var categories = ViewData["categories"] as List<CategoryDto>;
 }
 
 <style>
@@ -124,94 +126,27 @@
             foreach (var product in products)
             {
                 <div class="h-3">
-                    <div id="product1" class="carousel slide carousel-fade" data-interval="false">
-                        <div class="carousel-inner relative">
-                            <div class="carousel-item">
-                                <div data-link="/Store/ProductDetail/@product.Id" class="product__info p-b-40 relative">
-                                    <div class=" product__info--new relative">
-                                        <div class="row ali-center jus-center">
-                                            <img src="@product.Images?.FirstOrDefault()" style="width: 280px; height: 280px"  />
-                                        </div>
-                                        <p class="product__name">@product.Name @product.Capacity?.Name - @product.Color?.Name</p>
-                                        <div class="d-flex align-items-center justify-content-center">
-                                            @if(product.Promotion != null)
-                                            {
-                                                <p class="product__price ma-r-8" style="text-decoration: line-through; font-size: 1.4rem;">@($"{product.Price:N0} đ")</p>
-                                            }
-                                            <p class="product__price">@($"{product.NewPrice:N0} đ")</p>
-                                        </div>
-                                        @if(product.Quantity == 0)
-                                        {
-                                            <p class="product__price">Hết hàng</p>
-                                        }
-                                    </div>
-                                </div>
+                    <a href="https://localhost:7254/Store/ProductDetail?id=@product.Id" class="product__info p-b-40 relative">
+                        <div class=" product__info--new relative">
+                            <div class="row ali-center jus-center">
+                                <img src="@product.Images?.FirstOrDefault()" style="width: 280px; height: 280px" />
                             </div>
+                            <p class="product__name">@product.Name @product.Capacity?.Name - @product.Color?.Name</p>
+                            <div class="d-flex align-items-center justify-content-center">
+                                @if (product.Promotion != null)
+                                {
+                                    <p class="product__price ma-r-8" style="text-decoration: line-through; font-size: 1.4rem;">@($"{product.Price:N0} đ")</p>
+                                }
+                                <p class="product__price">@($"{product.NewPrice:N0} đ")</p>
+                            </div>
+                            @if (product.Quantity == 0)
+                            {
+                                <p class="product__price">Hết hàng</p>
+                            }
                         </div>
-                    </div>
+                    </a>
                 </div>
             }
         }
     </div>
-    <script>
-            var carouselItems = $(".product__list .h-3");
-            var productLists = $(".product__list");
-            var productInfos = $(".product__info");
-            var categories = $(".category-item");
-            var navItems = $(".nav__item");
-
-            Array.from(categories).forEach(category => {
-                category.addEventListener("click", e => {
-                    $.ajax({
-                        url: category.dataset.link,
-                        success: function (result) {
-                            $("#content").html(result);
-                            document.documentElement.scrollTop = 0;
-
-                            Array.from(navItems).forEach(navItem => {
-                                if (navItem.dataset.type === category.dataset.type) {
-                                    document.querySelector(".nav__item.active").classList.remove("active");
-                                    navItem.classList.add("active");
-                                }
-                            });
-                        }
-                    });
-                })
-            });
-
-            Array.from(productInfos).forEach(productInfo => {
-                productInfo.addEventListener("click", e => {
-                    e.preventDefault();
-
-                    $.ajax({
-                        url: productInfo.dataset.link,
-                        success: function (result) {
-                            $("#content").html(result);
-                            document.documentElement.scrollTop = 0;
-                        }
-                    })
-                });
-            });
-
-            Array.from(carouselItems).forEach(item => {
-                item.querySelector(".carousel-item").classList.add("active");
-                if (item.querySelector(".carousel-indicators li")) {
-                    item.querySelector(".carousel-indicators li").classList.add("active");
-                }
-
-                item.addEventListener("mouseout", (e) => {
-                    item.querySelector(".carousel-item.active .product__info").style = `box-shadow: none;`;
-
-                })
-            });
-
-            Array.from(productLists).forEach(productList => {
-                productList.addEventListener("mouseover", (e) => {
-                    if (e.target.closest(".product__memory li") || e.target.closest(".product__info")) {
-                        var parent = getParentElement(e.target, ".carousel-fade");
-                        parent.querySelector(".carousel-item.active .product__info").style = `box-shadow: 9px 9px 16px rgb(0 0 0 / 44%), -9px -9px 16px rgb(83 83 86);`;
-                    }
-                });
-            });
-        </script>
 </div>

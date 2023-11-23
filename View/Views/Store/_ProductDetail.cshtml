@@ -1,6 +1,7 @@
 @using Domain.DTOs;
 
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "ProductDetail";
     var product = ViewData["product"] as ProductDto;
 }
@@ -75,12 +76,6 @@
             <div>
                 <p class="product__count" hidden>@(product.Quantity)</p>
                 <p class="product_id" hidden data-id="@product.Id" />
-                @if (product.Quantity == 0)
-                {
-                    <p class="sole_out"
-                        style="font-size: 1.4rem; color: white; font-weight: 500; background: red; padding: 20px; border-radius: 5px ">
-                        Hết hàng</p>
-                }
                 <h1 class="product__name">@product.Name @product.Capacity?.Name - @product.Color?.Name</h1>
                 <div class="mt-3">
                     @if (product.Promotion != null)
@@ -117,7 +112,16 @@
             </div>
 
             <div class="product__buy detail">
-                <button>Mua ngay</button>
+                @if (product.Quantity == 0)
+                {
+                    <p class="sole_out" style="font-size: 1.4rem; color: white; font-weight: 500; background: red; padding: 20px; border-radius: 5px; text-align: center ">
+                        Sản phẩm tạm hết hàng
+                    </p>
+                }
+                else
+                {
+                    <button>Mua ngay</button>
+                }
             </div>
         </div>
     </div>
@@ -158,40 +162,19 @@
         </div>
     </div>
 </div>
-
 <script>
     //product detail
     var productParameter = $(".product__parameter");
     var buyBtn = $(".product__buy.detail button");
-    var productName = $(".product__name").first();
-    var productPrice = $(".product_price");
-    var oldPrice = $(".old_price");
-    var productImage = $(".product__image img");
-    var headerNotiy = $(".header__notify");
     var ImagecarouselItem = $(".product__image .carousel-item").first();
     var SuggestItem = $("#suggest-list .carousel-item").first();
     var memories = $(".product__memory li");
     var productLeft = $(".product__count");
-    var userAccount = $(".user__account");
-    var commentBlock = $(".product__comment");
-    var userForm = $("#user__form").get(0);
-    var commentText = $(".add-comment textarea").first();
-    var addCommentBtn = $(".add-comment button");
-    var userInfo = JSON.parse(localStorage.getItem("user_info"));
-    var commentList = $(".comment__list").first();
-    var userInfo = JSON.parse(localStorage.getItem("user_info")) || {};
-    @* var form = new Validate(".form__comment"); *@
     var productList = $(".product__list").get(0);
     var formData;
     var productInfos = $(".product__info");
     var productStorages = $(".product__storage");
     var inputs = $("#user__form input[type='text']");
-    var userName = $("#fullname").get(0);
-    var userPhone = $("#phone_number").get(0);
-    var userAddress = $("#address").get(0);
-    var userGenderNam = $("#user__form input[name = KH_GIOITINH]").get(0);
-    var userGenderNu = $("#user__form input[name = KH_GIOITINH]").get(1);
-    var userDetail = JSON.parse(localStorage.getItem("user_info")) || {};
     var toggleCollapses = $(".toggle");
 
     Array.from(toggleCollapses).forEach(toggleCollapse => {
@@ -211,49 +194,7 @@
     });
 
     if (Array.from(inputs).length > 0) {
-        userName.addEventListener("input", (e) => {
-            userDetail.name = userName.value;
-
-            localStorage.setItem("user_info", JSON.stringify(userDetail));
-        });
-
-        userPhone.addEventListener("input", (e) => {
-            userDetail.phone = userPhone.value;
-
-            localStorage.setItem("user_info", JSON.stringify(userDetail));
-        });
-
-        userAddress ? userAddress.addEventListener("input", (e) => {
-            userDetail.address = userAddress.value;
-
-            localStorage.setItem("user_info", JSON.stringify(userDetail));
-        }) : null;
-
-        userGenderNam.addEventListener("input", (e) => {
-            if (userGenderNam.checked) {
-                userDetail.gender = "Nam";
-
-                localStorage.setItem("user_info", JSON.stringify(userDetail));
-            }
-        });
-
-        userGenderNu.addEventListener("input", (e) => {
-            if (userGenderNu.checked) {
-                userDetail.gender = "Nữ";
-
-                localStorage.setItem("user_info", JSON.stringify(userDetail));
-            }
-        });
-
-        if (Object.keys(userDetail).length > 0) {
-            userDetail.gender === "Nam" && userDetail.gender ? userGenderNam.checked = true : userGenderNu.checked = true;
-            userDetail.phone ? userPhone.value = userDetail.phone : userPhone.value = "";
-            userDetail.name ? userName.value = userDetail.name : userName.value = "";
-            userAddress ? userDetail.address ? userAddress.value = userDetail.address : userAddress.value = "" : null;
-        }
-
-        //=======================================================================
-        Array.from(inputs).forEach(input => {
+            Array.from(inputs).forEach(input => {
             input.addEventListener("click", (e) => {
                 var parentInput = getParentElement(e.target, ".form__item");
 
@@ -332,90 +273,7 @@
 
     ////Lưu thông tin sản phẩm khách chọn
     buyBtn.click((e) => {
-        var userCart = JSON.parse(localStorage.getItem("user_cart")) || [];
-
-        var info = {
-            "id": productId.data("id"),
-            "name": productName.text() + " " + (productMemory.text() ? productMemory.text() : ""),
-            "price": parseInt(DeleteCommas(productPrice.text())),
-            "number": 1,
-            "image": productImage.attr('src'),
-            "oldPrice": oldPrice ? parseInt(DeleteCommas(oldPrice.text())) : 0
-        };
-
-
-        if (CheckProductExitst(userCart, info.name)) {
-            userCart[GetIndex(userCart, info.name)].number = userCart[GetIndex(userCart, info.name)].number + 1;
-        }
-        else {
-            userCart.push(info);
-        }
-
-        localStorage.setItem("user_cart", JSON.stringify(userCart));
-
-        productCount.addClass("active");
-
-        productCount.text(TotalProduct(userCart));
-        headerNotiy.addClass("active");
-        setTimeout(() => {
-            headerNotiy.removeClass("active");
-        }, 2000)
+        window.location.href = "/Store/Cart";
     });
 
-    @* form.onSubmit = function (value) {
-        formData = value;
-        } *@
-
-        commentList.scrollTop(commentList.prop("scrollHeight"));
-
-    commentText.click(e => {
-        commentBlock.removeClass("not-active").addClass("active");
-    });
-
-    $(".form__comment").submit((e) => {
-        e.preventDefault();
-
-        userInfo = JSON.parse(localStorage.getItem("user_info")) || {};
-
-        if (commentText.val() !== "") {
-            $.ajax({
-                url: "/Store/AddComment",
-                type: "get",
-                data: $(".form__comment").serialize(),
-                success: function (result) {
-                    commentList.append(CreateCommentItem(userInfo, commentText.val()));
-                    commentList.scrollTop(commentList.prop("scrollHeight"));
-                    commentText.val("");
-                }
-            });
-        }
-
-        else {
-        }
-    });
-
-    if (Object.keys(userInfo).length > 0) {
-        userInfo.phone ? $(".add-comment input[name = KH_SDT]").val(userInfo.phone) : null;
-        userInfo.name ? $(".add-comment input[name = KH_TEN]").val(userInfo.name) : null;
-
-        userInfo.gender && userInfo.gender === "Nam" ? $(".add-comment input[name = KH_GIOITINH]").val("True") : $(".add-comment input[name = KH_GIOITINH]").val("False");
-    }
-
-    var commentListItem = $(".comment__item");
-
-    Array.from(commentListItem).forEach(item => {
-        if (item.querySelector(".admin-role")) {
-            item.classList.add("answer");
-        }
-    });
-
-    var answers = $(".comment__item.answer");
-
-    Array.from(answers).forEach(answer => {
-        var adminAnswers = answer.querySelectorAll(".admin-role");
-
-        if (adminAnswers.length > 1) {
-            answer.querySelector(".relationship").style.height = (82 * (adminAnswers.length - 1) + 50) + "px";
-        }
-    });
 </script>
