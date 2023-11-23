@@ -186,10 +186,12 @@
                                                         }
                                                         <p class="product__price">@($"{product.NewPrice:N0} đ")</p>
                                                     </div>
-                                                    @if(product.Quantity == 0)
-                                                    {
-                                                        <p class="product__price">Hết hàng</p>
-                                                    }
+                                                    <div class="product__price" style="height: 26px;">
+                                                        @if(product.Quantity == 0)
+                                                        {
+                                                            <p>Hết hàng</p>
+                                                        }
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
