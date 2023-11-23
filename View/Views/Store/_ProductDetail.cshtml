@@ -73,10 +73,6 @@
             <div>
                 <p class="product__count" hidden>@(product.Quantity)</p>
                 <p class="product_id" hidden data-id="@product.Id" />
-                @if(product.Quantity == 0)
-                {
-                    <p class="sole_out" style="font-size: 1.4rem; color: white; font-weight: 500; background: red; padding: 20px; border-radius: 5px ">Hết hàng</p>
-                }
                 <h1 class="product__name">@product.Name @product.Capacity?.Name - @product.Color?.Name</h1>
                 <div class="mt-3">
                     @if (product.Promotion != null)
@@ -107,7 +103,16 @@
             </div>
 
             <div class="product__buy detail">
-                <button>Mua ngay</button>
+                @if (product.Quantity == 0)
+                {
+                    <p class="sole_out" style="font-size: 1.4rem; color: white; font-weight: 500; background: red; padding: 20px; border-radius: 5px; text-align: center ">
+                        Sản phẩm tạm hết hàng
+                    </p>
+                }
+                else
+                {
+                    <button>Mua ngay</button>
+                }
             </div>
         </div>
     </div>

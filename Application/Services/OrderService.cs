@@ -3,6 +3,7 @@ using Application.Interfaces.Services;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Requests.Orders;
+using Microsoft.AspNetCore.Http;
 using System.Transactions;
 
 namespace Application.Services
@@ -10,25 +11,25 @@ namespace Application.Services
     public class OrderService: IOrderService
     {
         private readonly IOrderRepository _orderRepo;
-
         private readonly IDetailOrderRepository _detailOrderRepo;
-
         private readonly ICustomerRepository _customerRepo;
-
         private readonly IMapper _mapper;
-
         private readonly IPromotionService _promotionService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public OrderService(IOrderRepository orderRepository, IDetailOrderRepository detailOrderRepository,
-           ICustomerRepository customerRepository, IMapper mapper, IPromotionService promotionService)
+           ICustomerRepository customerRepository, IMapper mapper, IPromotionService promotionService,
+           IHttpContextAccessor httpContextAccessor)
         {
             _orderRepo = orderRepository;
             _detailOrderRepo = detailOrderRepository;
             _customerRepo = customerRepository;
             _mapper = mapper;
             _promotionService = promotionService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
+        // Giảm số lượng sản phẩm
         public async Task Create(CreateOrderRequest pRequest)
         {
             // Ràng buộc dữ liệu
@@ -72,6 +73,8 @@ namespace Application.Services
                         sumPrice[1] += detailOrder.DiscountPrice;
                         sumPrice[2] += detailOrder.SumPrice;
 
+                        // Giảm số lượng sản phẩm
+
                         detailOrder.OrderId = resultOrder.Id;
                         var detail = _mapper.Map<DetailOrder>(detailOrder);
 
@@ -82,8 +85,20 @@ namespace Application.Services
                 {
                     transaction.Dispose();
                 }
-            }
-            
-        }    
+            }            
+        }
+
+        public async Task Cart()
+        {
+            var httpContext = _httpContextAccessor.HttpContext;
+
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(7),
+                // HttpOnly, Secure, SameSite, ...
+            };
+
+            httpContext.Response.Cookies.Append("thuanpt", "thuanpt", cookieOptions);
+        }
     }
 }
