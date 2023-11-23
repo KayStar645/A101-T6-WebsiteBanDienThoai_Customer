@@ -38,7 +38,7 @@ namespace View.Controllers
                 ViewData[category.Id.ToString()] = products.Data;
             }
 
-            return PartialView("_Layout");
+            return View("_Home");
         }
 
         public async Task<IActionResult> Home()
@@ -65,6 +65,9 @@ namespace View.Controllers
 
         public async Task<IActionResult> ProductDetail(int id)
         {
+            var categoriesResult = await _categoryService.GetAll();
+            ViewData["categories"] = categoriesResult.Data;
+
             var result = await _productService.GetDetail(id);
             ViewData["product"] = result.Data;
 
@@ -73,6 +76,9 @@ namespace View.Controllers
 
         public async Task<IActionResult> Category(int id)
         {
+            var categoriesResult = await _categoryService.GetAll();
+            ViewData["categories"] = categoriesResult.Data;
+
             var listProductRequest = new ListProductRequest
             {
                 Page = 1,
@@ -85,13 +91,19 @@ namespace View.Controllers
             return PartialView("_ProductByCategory");
         }
 
-        public IActionResult Cart()
+        public async Task<IActionResult> Cart()
         {
+            var categoriesResult = await _categoryService.GetAll();
+            ViewData["categories"] = categoriesResult.Data;
+
             return PartialView("_Cart");
         }
 
-        public IActionResult Order()
+        public async Task<IActionResult> Order()
         {
+            var categoriesResult = await _categoryService.GetAll();
+            ViewData["categories"] = categoriesResult.Data;
+
             return PartialView("_Order");
         }
     }
