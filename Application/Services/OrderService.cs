@@ -73,7 +73,7 @@ namespace Application.Services
                         sumPrice[1] += detailOrder.DiscountPrice;
                         sumPrice[2] += detailOrder.SumPrice;
 
-                        // Giảm số lượng sản phẩm
+                        // Giảm số lượng sản phẩm: làm việc với DB ProductRepo
 
                         detailOrder.OrderId = resultOrder.Id;
                         var detail = _mapper.Map<DetailOrder>(detailOrder);
