@@ -54,7 +54,10 @@ namespace Application.Profiles
 
             CreateMap<Order, OrderDto>().ReverseMap();
 
-            CreateMap<DetailOrder, DetailOrderDto>().ReverseMap();
+            CreateMap<DetailOrder, DetailOrderDto>();
+
+            CreateMap<DetailOrderDto, DetailOrder>()
+                .ForMember(dest => dest.Product, opt => opt.Ignore());
 
             CreateMap<Customer, CustomerDto>().ReverseMap();
         }

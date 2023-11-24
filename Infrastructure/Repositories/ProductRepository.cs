@@ -12,5 +12,21 @@ namespace Infrastructure.Repositories
         {
             _context = pcontext;
         }
+
+        public async Task<bool> ReduceNumberAsync(int pProductId, int pNumber)
+        {
+            var product = await _context.Product.FindAsync(pProductId);
+            if(product != null)
+            {
+                if(product.Quantity >= pNumber) 
+                {
+                    product.Quantity -= pNumber;
+                    _context.Product.Update(product);
+                    _context.SaveChanges();
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

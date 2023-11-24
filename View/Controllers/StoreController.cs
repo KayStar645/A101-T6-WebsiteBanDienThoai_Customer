@@ -6,17 +6,16 @@ namespace View.Controllers
 {
     public class StoreController : Controller
     {
-        private readonly ILogger<StoreController> _logger;
-
         private readonly IProductService _productService;
-
         private readonly ICategoryService _categoryService;
+        private readonly IOrderService _orderService;
 
-        public StoreController(ILogger<StoreController> logger, IProductService productService, ICategoryService categoryService)
+        public StoreController(IProductService productService, ICategoryService categoryService, 
+            IOrderService orderService)
         {
-            _logger = logger;
             _productService = productService;
             _categoryService = categoryService;
+            _orderService = orderService;
         }
 
         public async Task<IActionResult> Index()
@@ -95,6 +94,9 @@ namespace View.Controllers
         {
             var categoriesResult = await _categoryService.GetAll();
             ViewData["categories"] = categoriesResult.Data;
+
+            var detailOrder = await _orderService.GetCart();
+            ViewData["detailOrder"] = detailOrder;
 
             return PartialView("_Cart");
         }

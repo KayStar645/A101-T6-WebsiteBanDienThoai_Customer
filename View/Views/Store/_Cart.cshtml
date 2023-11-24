@@ -1,6 +1,8 @@
+@using Domain.DTOs;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Cart";
+    var detailOrder = ViewData["detailOrder"] as List<DetailOrderDto>;
 }
 
 <style>
@@ -164,49 +166,62 @@
         <div class="detail__cart">
             <div class="forsure">
                 <form action="" method="post" id="user__form">
-                    <div class="product__list" style="padding-bottom: 16px;">
-                        <input name="SP_Ma" value="${info.id}" hidden>
-                        <div class="row">
-                            <div class="h-2">
-                                <div class="forsure">
-                                    <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/281570/s16/iphone-15-black-thumbtz_0-650x650.png"
-                                        style="width: 100px;" />
-                                    <div class="remove__product text-center ma-t-12">
-                                        <p>Xóa</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="h-7">
-                                <div class="p-l-12">
-                                    <p class="cart__name">14 ProMax 512GB Xanh đen</p>
-                                </div>
-                            </div>
-
-                            <div class="h-3">
-                                <div class="row flex-column ali-end jus-between h-100">
-                                    <div>
-                                        <div class="product__price">
-                                            <p style="text-align: right">14.000.000đ</p>
-                                        </div>
-                                        <p
-                                            style="font-size: 1.35rem; text-decoration: line-through; color: #8f8f8f; text-align: right">
-                                            14.000.000đ</p>
-                                    </div>
-
-                                    <div class="forsure">
-                                        <div class="row ali-center product__count">
-                                            <i class="fa-solid fa-minus active"></i>
-                                            <p>1</p>
-
-                                            <input name="SP_SOLUONG" value="${info.number}" hidden>
-                                            <i class="fa-solid fa-plus active"></i>
+                    @if (detailOrder != null)
+                    {
+                        foreach (var detail in detailOrder)
+                        {
+                            <div class="product__list" style="padding-bottom: 16px;">
+                                <input name="SP_Ma" value="@detail.ProductId" hidden>
+                                <div class="row">
+                                    <div class="h-2">
+                                        <div class="forsure">
+                                            <img src="@detail?.Product?.Images?.FirstOrDefault()"
+                                                 style="width: 100px;" />
+                                            <div class="remove__product text-center ma-t-12">
+                                                <p>Xóa</p>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <div class="h-7">
+                                        <div class="p-l-12">
+                                            <p class="cart__name">
+                                                @detail?.Product.Name -
+                                                @detail?.Product.Capacity?.Name -
+                                                @detail?.Product.Color?.Name
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="h-3">
+                                        <div class="row flex-column ali-end jus-between h-100">
+                                            <div>
+                                                <div class="product__price">
+                                                    <p style="text-align: right">@($"{detail.Price:N0} đ")</p>
+                                                </div>
+                                                @if (detail.DiscountPrice != 0)
+                                                {
+                                                    <p style="font-size: 1.35rem; text-decoration: line-through; color: #8f8f8f; text-align: right">
+                                                        @($"{detail.Price - @detail.DiscountPrice:N0} đ")
+                                                    </p>
+                                                }
+                                            </div>
+
+                                            <div class="forsure">
+                                                <div class="row ali-center product__count">
+                                                    <i class="fa-solid fa-minus active"></i>
+                                                    <p>1</p>
+
+                                                    <input name="SP_SOLUONG" value="@detail.Quantity" hidden>
+                                                    <i class="fa-solid fa-plus active"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        }
+                    }
 
                     <div class="customer__info">
                         <p class="title">Thông tin khách hàng</p>
@@ -255,7 +270,7 @@
                                 <div class="h-12 p-t-16">
                                     <div class="form__group relative form__item ">
                                         <label for="address">Địa chỉ</label>
-                                        <input type="text" name="KH_DIACHI" rule="required" id="address"
+                                        <input type="text" nae="KH_DIACHI" rule="required" id="address"
                                             class="form__control" placeholder="">
                                         <span class="form__warning"></span>
                                     </div>
@@ -274,10 +289,21 @@
                     </div>
 
                     <div class="product__buy confirm-btn detail">
-                        <button data-link="/Store/UpdatePhieuXuat">Đặt hàng</button>
+                        <button>Đặt hàng</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    var buyBtn = $(".product__buy.detail button");
+    var name = $("input[name=KH_TEN]").get(0).value;
+    var address = $("input[name=KH_DIACHI]").value;
+    var phone = $("input[name=KH_SDT]").get(0).Value;
+
+    buyBtn.click((e) => {
+        window.location.href = "/Order/Create?name=" + name + "&address=" + address + "&phone=" + phone;
+    });
+</script>

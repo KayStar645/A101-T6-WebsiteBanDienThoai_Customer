@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Repositories.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -11,6 +12,13 @@ namespace Infrastructure.Repositories
         public OrderRepository(SmartPhoneDbContext pcontext) : base(pcontext)
         {
             _context = pcontext;
+        }
+
+        public async Task<string> RangeInternalCode()
+        {
+            var internalCodes = await _context.Order.Select(x => x.InternalCode).ToListAsync();
+
+            return "HD231124-0000001";
         }
     }
 }

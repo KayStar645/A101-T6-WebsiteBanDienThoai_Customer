@@ -5,5 +5,6 @@ namespace Application.Interfaces.Repositories
 {
     public interface IOrderRepository : IBaseRepository<Order>
     {
+        Task<string> RangeInternalCode();
     }
 }
