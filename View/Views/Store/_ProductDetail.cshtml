@@ -75,7 +75,7 @@
         <div class="h-7 relative" style="padding-left: 40px;">
             <div>
                 <p class="product__count" hidden>@(product.Quantity)</p>
-                <p class="product_id" hidden data-id="@product.Id" />
+                <p id="product_id" hidden data-id="@product.Id" />
                 <h1 class="product__name">@product.Name @product.Capacity?.Name - @product.Color?.Name</h1>
                 <div class="mt-3">
                     @if (product.Promotion != null)
@@ -164,6 +164,7 @@
 </div>
 <script>
     //product detail
+    var productId = $("#product_id").data("id");
     var productParameter = $(".product__parameter");
     var buyBtn = $(".product__buy.detail button");
     var ImagecarouselItem = $(".product__image .carousel-item").first();
@@ -263,7 +264,6 @@
     });
 
     var productMemory = $(".product__memory li.active");
-    var productId = $(".product_id");
 
     productParameter.click((e) => {
         if (e.target.closest(".arrow__list")) {
@@ -273,7 +273,7 @@
 
     ////Lưu thông tin sản phẩm khách chọn
     buyBtn.click((e) => {
-        window.location.href = "/Store/Cart";
+        window.location.href = "/Order/AddProductToCart?pProductId=" + productId;
     });
 
 </script>

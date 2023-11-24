@@ -5,5 +5,6 @@ namespace Application.Interfaces.Repositories
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
+        Task<bool> ReduceNumberAsync(int pProductId, int pNumber);
     }
 }

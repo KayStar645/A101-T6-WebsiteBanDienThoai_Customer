@@ -14,6 +14,8 @@ namespace Application.Interfaces.Repositories.Common
         Task DeleteAsync(T entity);
         Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
 
+        Task Save();
+
         // Query
         IQueryable<T> Entities { get; }
         IQueryable<T> Query();

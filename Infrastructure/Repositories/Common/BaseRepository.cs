@@ -42,6 +42,7 @@ namespace Infrastructure.Repositories.Common
         public virtual async Task<T> AddAsync(T pEntity)
         {
             await _context.Set<T>().AddAsync(pEntity);
+            await _context.SaveChangesAsync();
             return pEntity;
         }
 
@@ -55,6 +56,7 @@ namespace Infrastructure.Repositories.Common
 #pragma warning disable CS8634 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'class' constraint.
             _context.Entry(exist).CurrentValues.SetValues(pEntity);
 #pragma warning restore CS8634 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'class' constraint.
+            await _context.SaveChangesAsync();
             return pEntity;
         }
 
@@ -69,6 +71,12 @@ namespace Infrastructure.Repositories.Common
             return await _context.Set<T>()
                 .Where(x => x.IsDeleted == false)
                 .AnyAsync(pPredicate);
+        }
+
+        public async Task Save()
+        {
+            await _context.SaveChangesAsync();
+
         }
 
         // Query
