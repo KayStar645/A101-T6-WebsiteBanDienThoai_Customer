@@ -33,9 +33,9 @@
         margin: 0;
     }
 
-        .content__policy img {
-            width: 100px;
-        }
+    .content__policy img {
+        width: 100px;
+    }
 
     .policy__item-body p {
         padding: 12px 0 16px;
@@ -50,9 +50,9 @@
         padding: 0;
     }
 
-        .category__item img {
-            width: 150px;
-        }
+    .category__item img {
+        width: 150px;
+    }
 
     .product__type img {
         width: 430px;
@@ -88,23 +88,28 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img style="border-radius: 20px; height: auto !important;" src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/11/banner/IP15-2880-800-1920x533.png" />
+                    <img style="border-radius: 20px; height: auto !important;"
+                        src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/11/banner/IP15-2880-800-1920x533.png" />
                 </div>
 
                 <div class="carousel-item">
-                    <img style="border-radius: 20px; height: auto !important;" src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/10/banner/AWCS-2880-800-1920x548-1.png" />
+                    <img style="border-radius: 20px; height: auto !important;"
+                        src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/10/banner/AWCS-2880-800-1920x548-1.png" />
                 </div>
 
                 <div class="carousel-item">
-                    <img style="border-radius: 20px; height: auto !important;" src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/10/banner/MacBook-Air-2880-800-1920x533.png" />
+                    <img style="border-radius: 20px; height: auto !important;"
+                        src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/10/banner/MacBook-Air-2880-800-1920x533.png" />
                 </div>
 
                 <div class="carousel-item">
-                    <img style="border-radius: 20px; height: auto !important;" src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/11/banner/ipad10-2880-800-1920x533.png" />
+                    <img style="border-radius: 20px; height: auto !important;"
+                        src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/11/banner/ipad10-2880-800-1920x533.png" />
                 </div>
 
                 <div class="carousel-item">
-                    <img style="border-radius: 20px; height: auto !important;" src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/10/banner/AirPods2-2880-800-1920x533.png" />
+                    <img style="border-radius: 20px; height: auto !important;"
+                        src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_1920x533/https://cdn.tgdd.vn/2023/10/banner/AirPods2-2880-800-1920x533.png" />
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -126,7 +131,7 @@
             foreach (var product in products)
             {
                 <div class="h-3">
-                    <a href="https://localhost:7254/Store/ProductDetail?id=@product.Id" class="product__info p-b-40 relative">
+                    <a href="/Store/ProductDetail?id=@product.Id" class="product__info p-b-40 relative">
                         <div class=" product__info--new relative">
                             <div class="row ali-center jus-center">
                                 <img src="@product.Images?.FirstOrDefault()" style="width: 280px; height: 280px" />
@@ -135,7 +140,8 @@
                             <div class="d-flex align-items-center justify-content-center">
                                 @if (product.Promotion != null)
                                 {
-                                    <p class="product__price ma-r-8" style="text-decoration: line-through; font-size: 1.4rem;">@($"{product.Price:N0} đ")</p>
+                                    <p class="product__price ma-r-8" style="text-decoration: line-through; font-size: 1.4rem;">
+                                        @($"{product.Price:N0} đ")</p>
                                 }
                                 <p class="product__price">@($"{product.NewPrice:N0} đ")</p>
                             </div>

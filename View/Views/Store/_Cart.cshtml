@@ -165,12 +165,12 @@
 
         <div class="detail__cart">
             <div class="forsure">
-                <form action="" method="post" id="user__form">
+                <div id="user__form">
                     @if (detailOrder != null)
                     {
                         foreach (var detail in detailOrder)
                         {
-                            <div class="product__list" style="padding-bottom: 16px;">
+                            <div class="product__item" style="padding-bottom: 16px;">
                                 <input name="SP_Ma" value="@detail.ProductId" hidden>
                                 <div class="row">
                                     <div class="h-2">
@@ -207,14 +207,11 @@
                                                 }
                                             </div>
 
-                                            <div class="forsure">
-                                                <div class="row ali-center product__count">
-                                                    <i class="fa-solid fa-minus active"></i>
-                                                    <p>1</p>
-
-                                                    <input name="SP_SOLUONG" value="@detail.Quantity" hidden>
-                                                    <i class="fa-solid fa-plus active"></i>
-                                                </div>
+                                            <div class="row ali-center product__count">
+                                                <i class="fa-solid fa-minus active"></i>
+                                                <p class="product__qty">1</p>
+                                                <input name="SP_SOLUONG" value="@detail.Quantity" hidden>
+                                                <i class="fa-solid fa-plus active"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -291,7 +288,7 @@
                     <div class="product__buy confirm-btn detail">
                         <button>Đặt hàng</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -299,11 +296,115 @@
 
 <script>
     var buyBtn = $(".product__buy.detail button");
-    var name = $("input[name=KH_TEN]").get(0).value;
-    var address = $("input[name=KH_DIACHI]").value;
-    var phone = $("input[name=KH_SDT]").get(0).Value;
+    var inputs = $("#user__form input[type='text']");
+    var userName = $("#fullname").get(0);
+    var userPhone = $("#phone_number").get(0);
+    var userAddress = $("#address").get(0);
+    var userGenderNam = $("#user__form input[name = KH_GIOITINH]").get(0);
+    var userGenderNu = $("#user__form input[name = KH_GIOITINH]").get(1);
+    var userDetail = {};
+    var productItems = $(".product__item");
+    var products = [];
+
+    if (Array.from(inputs).length > 0) {
+        userName.addEventListener("input", (e) => {
+            userDetail.name = userName.value;
+        });
+
+        userPhone.addEventListener("input", (e) => {
+            userDetail.phone = userPhone.value;
+        });
+
+        userAddress ? userAddress.addEventListener("input", (e) => {
+            userDetail.address = userAddress.value;
+        }) : null;
+
+        userGenderNam.addEventListener("input", (e) => {
+            if (userGenderNam.checked) {
+                userDetail.gender = "Nam";
+            }
+        });
+
+        userGenderNu.addEventListener("input", (e) => {
+            if (userGenderNu.checked) {
+                userDetail.gender = "Nữ";
+            }
+        });
+
+        if (Object.keys(userDetail).length > 0) {
+            userDetail.gender === "Nam" && userDetail.gender ? userGenderNam.checked = true : userGenderNu.checked = true;
+            userDetail.phone ? userPhone.value = userDetail.phone : userPhone.value = "";
+            userDetail.name ? userName.value = userDetail.name : userName.value = "";
+            userAddress ? userDetail.address ? userAddress.value = userDetail.address : userAddress.value = "" : null;
+        }
+
+        Array.from(inputs).forEach(input => {
+            input.addEventListener("click", (e) => {
+                var parentInput = getParentElement(e.target, ".form__item");
+
+                parentInput.classList.add("active");
+                parentInput.classList.replace("non-active", "active");
+            });
+
+            input.addEventListener("blur", (e) => {
+                var parentInput = getParentElement(e.target, ".form__item");
+                var text = parentInput.querySelector("input").value;
+
+                if (text.trim() == "") {
+                    parentInput.classList.replace("active", "non-active");
+                }
+                else {
+                    parentInput.classList.add("success");
+                }
+            });
+
+            if (input.value !== "") {
+                var parent = getParentElement(input, ".form__group");
+
+                if (parent) {
+                    parent.classList.add("active", "success");
+                }
+            }
+        });
+    }
+
+    Array.from(productItems).forEach(t => {
+        const id = $("input[name = SP_Ma]").get(0).value;
+        const qtyElement = t.querySelector(".product__qty");
+        let qty = parseInt(qtyElement.innerHTML);
+
+        const product = {
+            id: id,
+            qty: qty,
+        }
+
+        t.addEventListener("click", e => {
+
+            if(e.target.closest(".fa-minus.active")){
+                qty = qty - 1;
+
+                if(qty <= 0){
+                    return;
+                }
+
+                qtyElement.innerHTML = qty;
+            }
+            if(e.target.closest(".fa-plus.active")){
+                qty = qty + 1;
+
+                qtyElement.innerHTML = qty;
+            }
+
+            product.qty = qty;
+        });
+
+        products.push(product);
+    });
+
 
     buyBtn.click((e) => {
-        window.location.href = "/Order/Create?name=" + name + "&address=" + address + "&phone=" + phone;
+        console.log(userDetail)
+        console.log(products)
+        @* window.location.href = "/Order/Create?name=" + name + "&address=" + address + "&phone=" + phone; *@
     });
 </script>

@@ -64,7 +64,7 @@
                 <div class="row ali-center h-100 header__body relative">
                     <div class="h-2 order2 header__logo">
                         <div class="d-flex align-items-center" style="gap: 12px">
-                            <a href="https://localhost:7254" data-type="Home" data-can-render="true" class="nav__item active">
+                            <a href="/" data-type="Home" data-can-render="true" class="nav__item active">
                                 <img src="~/image/logo.png" />
                             </a>
                             <img style="width: 32px; height: 40px" src="~/image/apple_logo.webp" />
@@ -82,7 +82,7 @@
                                     foreach (var category in categories)
                                     {
                                         <a class="h-100 d-flex align-items-center justify-content-center nav__item"
-                                            href="https://localhost:7254/Store/Category/@category.Id" data-type="Phone" data-can-render="true">
+                                            href="/Store/Category/@category.Id" data-type="Phone" data-can-render="true">
                                             <p>@category.Name</p>
                                         </a>
                                     }
@@ -104,8 +104,7 @@
                                 </a>
 
                                 <div class="forsure">
-                                    <a href="/Store/Cart" data-can-render="true"
-                                        class="user__cart nav__item relative">
+                                    <a href="/Store/Cart" data-can-render="true" class="user__cart nav__item relative">
                                         <i class="fa-solid fa-bag-shopping circle-btn"></i>
                                         <p class="product__count"></p>
                                         <div class="header__notify">
