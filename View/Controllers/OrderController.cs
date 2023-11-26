@@ -23,6 +23,13 @@ namespace View.Controllers
             return RedirectToAction("Cart", "Store");
         }
 
+        public async Task<IActionResult> UpdateQuantityProductInCart(int pProductId, int pQuantity)
+        {
+            await _orderService.UpdateQuantityProductInCart(pProductId, pQuantity);
+
+            return RedirectToAction("Cart", "Store");
+        }
+
         public async Task<IActionResult> Create(string name, string address, string phone)
         {
             var customerDto = new CustomerDto
@@ -36,7 +43,7 @@ namespace View.Controllers
             var order = new CreateOrderRequest
             {
                 Customer = customerDto,
-                Details = await _orderService.GetCart()
+                Details = (await _orderService.GetCart()).products
             };
 
             await _orderService.Create(order);

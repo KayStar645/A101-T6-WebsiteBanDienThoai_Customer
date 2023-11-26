@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Cart";
     var detailOrder = ViewData["detailOrder"] as List<DetailOrderDto>;
+    var sumPrice = ViewData["sumPrice"];
 }
 
 <style>
@@ -209,8 +210,7 @@
 
                                             <div class="row ali-center product__count">
                                                 <i class="fa-solid fa-minus active"></i>
-                                                <p class="product__qty">1</p>
-                                                <input name="SP_SOLUONG" value="@detail.Quantity" hidden>
+                                                <p class="product__qty">@detail.Quantity</p>
                                                 <i class="fa-solid fa-plus active"></i>
                                             </div>
                                         </div>
@@ -224,7 +224,7 @@
                         <p class="title">Thông tin khách hàng</p>
 
                         <div class="forsure">
-                            <div class="form__group">
+                            <div class="form__group" hidden>
                                 <div class="row ali-center">
                                     <div class="h-3">
                                         <label class="gender__label relative">
@@ -277,11 +277,10 @@
                     </div>
 
                     <div class="row ali-center jus-between p-t-12">
-                        <p class="product__total title">Tổng tiền<span>(0 sản phẩm):</span></p>
+                        <p class="product__total title">Tổng tiền<span>(@detailOrder?.Count sản phẩm):</span></p>
 
                         <div class="product__price products__price">
-                            <p>0đ</p>
-                            <input type="text" name="PX_TONGTIEN" value="0" hidden />
+                            <p>@($"{sumPrice:N0} đ")</p>
                         </div>
                     </div>
 
@@ -394,8 +393,12 @@
 
                 qtyElement.innerHTML = qty;
             }
+            if (e.target.closest(".remove__product")) {
+                window.location.href = "Xóa nè";
+            }
 
             product.qty = qty;
+            window.location.href = "/Order/UpdateQuantityProductInCart?pProductId=" + product.id + "&pQuantity=" + product.qty;
         });
 
         products.push(product);
@@ -405,6 +408,6 @@
     buyBtn.click((e) => {
         console.log(userDetail)
         console.log(products)
-        @* window.location.href = "/Order/Create?name=" + name + "&address=" + address + "&phone=" + phone; *@
+        window.location.href = "/Order/Create?name=" + userDetail.name + "&address=" + userDetail.address + "&phone=" + userDetail.phone;
     });
 </script>

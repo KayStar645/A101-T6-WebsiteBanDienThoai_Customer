@@ -17,8 +17,21 @@ namespace Infrastructure.Repositories
         public async Task<string> RangeInternalCode()
         {
             var internalCodes = await _context.Order.Select(x => x.InternalCode).ToListAsync();
+            int max = 0;
+            foreach (var internalCode in internalCodes)
+            {
+                int number = int.Parse(internalCode.Substring(9));
+                max = Math.Max(max, number);
+            }
+            max++;
+            string code = max.ToString();
+            while(code.Length < 7)
+            {
+                code = "0" + code;
+            }
+            DateTime currentDate = DateTime.Now;
 
-            return "HD231124-0000001";
+            return "HD" + currentDate.ToString("yyMMdd") + "-" + code;
         }
     }
 }

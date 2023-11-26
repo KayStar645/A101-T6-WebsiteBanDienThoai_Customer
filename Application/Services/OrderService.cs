@@ -73,7 +73,7 @@ namespace Application.Services
                         detailOrder.SumPrice = result.newPrice * detailOrder.Quantity;
 
                         // Cập nhật giá lại cho đơn hàng
-                        sumPrice[0] += detailOrder.Price;
+                        sumPrice[0] += detailOrder.Price * detailOrder.Quantity;
                         sumPrice[1] += detailOrder.DiscountPrice;
                         sumPrice[2] += detailOrder.SumPrice;
 
@@ -92,6 +92,9 @@ namespace Application.Services
                     createOrder.Price = sumPrice[0];
                     createOrder.DiscountPrice = sumPrice[1];
                     createOrder.SumPrice = sumPrice[2];
+
+                    await _orderRepo.UpdateAsync(createOrder);
+
                     transaction.Complete();
                     _httpContext.HttpContext.Response.Cookies.Delete("products");
                 }
@@ -105,7 +108,7 @@ namespace Application.Services
         public async Task AddProductToCart(int pProductId)
         {
             var list = await GetCart();
-            if(list.Any(x => x.ProductId == pProductId))
+            if(list.products.Any(x => x.ProductId == pProductId))
             {
                 return;
             }    
@@ -148,12 +151,30 @@ namespace Application.Services
 
             var cookieOptions = new CookieOptions
             {
-                Expires = DateTime.Now.AddYears(1),
+                Expires = DateTime.Now.AddDays(7),
             };
             _httpContext.HttpContext.Response.Cookies.Append("products", productsJson, cookieOptions);
         }
 
-        public async Task<List<DetailOrderDto>> GetCart()
+        public async Task UpdateQuantityProductInCart(int pProductId, int pQuantity)
+        {
+            var list = await GetCart();
+            var product = list.products.FirstOrDefault(x => x.ProductId == pProductId);
+            if (product != null)
+            {
+                product.SumPrice = (product.SumPrice / product.Quantity) * pQuantity;
+                product.Quantity = pQuantity;
+
+            }
+            var productsJson = JsonConvert.SerializeObject(list);
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(7),
+            };
+            _httpContext.HttpContext.Response.Cookies.Append("products", productsJson, cookieOptions);
+        }
+
+        public async Task<(List<DetailOrderDto> products, long sumPrice)> GetCart()
         {
 
             var productsCookie = _httpContext.HttpContext.Request.Cookies["products"];
@@ -167,7 +188,8 @@ namespace Application.Services
             {
                 products = JsonConvert.DeserializeObject<List<DetailOrderDto>>(productsCookie);
             }
-            return products;
+            long sumPrice = products.Sum(x => x.SumPrice);
+            return (products, sumPrice);
         }
 
     }

@@ -95,8 +95,9 @@ namespace View.Controllers
             var categoriesResult = await _categoryService.GetAll();
             ViewData["categories"] = categoriesResult.Data;
 
-            var detailOrder = await _orderService.GetCart();
-            ViewData["detailOrder"] = detailOrder;
+            var result = await _orderService.GetCart();
+            ViewData["detailOrder"] = result.products;
+            ViewData["sumPrice"] = result.sumPrice;
 
             return PartialView("_Cart");
         }
