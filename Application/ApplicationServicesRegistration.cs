@@ -16,6 +16,7 @@ namespace Application
             services.AddScoped<IPromotionService, PromotionService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IRecommendPurchasingTogetherService, RecommendPurchasingTogetherService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
