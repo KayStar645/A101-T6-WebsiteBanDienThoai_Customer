@@ -1,9 +1,7 @@
 ﻿using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
-using Bonsai.Reactive;
 using Domain.DTOs;
 using Newtonsoft.Json;
-using Python.Runtime;
 using System.Diagnostics;
 using System.Text;
 
@@ -14,7 +12,9 @@ namespace Application.Services
         private readonly IOrderRepository _orderRepo;
         private readonly float _minSupport = 0.3F;
         private readonly int _topK = 10;
-        private string _scriptPath = "D:\\Algorithm\\FP-Growth.py";
+
+        string _scriptPath = Path.Combine(Directory.GetCurrentDirectory(), "Algorithm", "FP-Growth.py")
+                                 .Replace("View", "Application");
 
         public RecommendPurchasingTogetherService(IOrderRepository orderRepo) 
         {
@@ -32,7 +32,7 @@ namespace Application.Services
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = "C:\\Users\\thuan\\AppData\\Local\\Programs\\Python\\Python38\\python.exe",
-                    Arguments = $"{_scriptPath} {arguments}",
+                    Arguments = $"\"{_scriptPath}\" {arguments}",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
