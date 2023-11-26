@@ -1,7 +1,9 @@
-﻿namespace Application.Interfaces.Services
+﻿using Domain.DTOs;
+
+namespace Application.Interfaces.Services
 {
     public interface IRecommendPurchasingTogetherService
     {
-        Task Get(int pProductId);
+        Task<List<int>> Get(int pProductId);
     }
 }

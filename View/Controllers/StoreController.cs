@@ -72,7 +72,7 @@ namespace View.Controllers
             var result = await _productService.GetDetail(id);
             ViewData["product"] = result.Data;
 
-            await _recommendService.Get(id);
+            var productsId = await _recommendService.Get(id);
 
             return PartialView("_ProductDetail");
         }
