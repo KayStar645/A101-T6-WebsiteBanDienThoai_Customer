@@ -166,7 +166,7 @@ namespace Application.Services
                 product.Quantity = pQuantity;
 
             }
-            var productsJson = JsonConvert.SerializeObject(list);
+            var productsJson = JsonConvert.SerializeObject(list.products);
             var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.Now.AddDays(7),
