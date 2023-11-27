@@ -11,7 +11,7 @@ namespace Application.Services
     {
         private readonly IOrderRepository _orderRepo;
         private readonly float _minSupport = 0.3F;
-        private readonly int _topK = 10;
+        private readonly int _topK = 3;
 
         string _scriptPath = Path.Combine(Directory.GetCurrentDirectory(), "Algorithm", "FP-Growth.py")
                                  .Replace("View", "Application");
@@ -21,7 +21,7 @@ namespace Application.Services
             _orderRepo = orderRepo;
         }
 
-        public async Task<List<int>> Get(int pProductId)
+        public async Task<List<ItemsetResultDto>> Get(int pProductId)
         {
             var transaction = await _orderRepo.GetTransactions(pProductId);
             string transactionJson = JsonConvert.SerializeObject(transaction.Select(x => x.ProductIds));
@@ -75,14 +75,14 @@ namespace Application.Services
                     var result =  JsonConvert.DeserializeObject<List<ItemsetResultDto>>(output);
 
 
-                    var distinctItems = result.SelectMany(x => x.Itemset)
-                                            .Distinct()
-                                            .Where(item => item != pProductId)
-                                            .ToList();
+                    //var distinctItems = result.SelectMany(x => x.Itemset)
+                    //                        .Distinct()
+                    //                        .Where(item => item != pProductId)
+                    //                        .ToList();
 
-                    return distinctItems;
+                    return result;
                 }
-                return new List<int>();
+                return new List<ItemsetResultDto>();
             }
         }    
     }

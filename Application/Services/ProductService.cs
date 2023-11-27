@@ -6,6 +6,7 @@ using Domain.DTOs;
 using Domain.Entities;
 using Domain.Requests.Products;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Application.Services
@@ -23,6 +24,52 @@ namespace Application.Services
             _productRepo = productRepo;
             _mapper = mapper;
             _promotionService = promotionService;
+        }
+
+        public async Task<List<(List<ProductDto> products, long sumOld, long sumNew)>> GetProductForRecommend
+            (List<ItemsetResultDto> pRequest, int pProductId)
+        {
+            List<(List<ProductDto> products, long sumOld, long sumNew)> result =
+                new List<(List<ProductDto> products, long sumOld, long sumNew)>();
+            foreach (var item in pRequest)
+            {
+                // Lấy sản phẩm của itemset này
+                var query = _productRepo.GetAllInclude();
+                query = query.Where(product => item.Itemset.Contains(product.Id) && product.Id != pProductId);
+
+                query = query.Include(x => x.Color);
+                query = query.Include(x => x.Capacity);
+
+                var products = await query.ToListAsync();
+                long sumOld = 0;
+                long sumNew = 0;
+
+                foreach (var product in products)
+                {
+                    // Lấy tất cả CTKM đang áp dụng cho sp này và chọn cái giảm giá cao nhất
+                    var promotion = await _promotionService.ApplyPromotionForProduct(product.Id);
+                    product.NewPrice = promotion.newPrice;
+                    sumOld += (long)product.Price;
+                    sumNew += (long)product.NewPrice;
+
+                    if (promotion.apply != null)
+                    {
+                        product.PromotionProducts = new List<PromotionProduct>{
+                            new PromotionProduct
+                            {
+                                ProductId = product.Id,
+                                PromotionId = promotion.apply.Id,
+                                Promotion = promotion.apply,
+                            }
+                        };
+                    }
+                }
+
+                var mapProducts = _mapper.Map<List<ProductDto>>(products);
+                
+                result.Add((mapProducts, sumOld, sumNew));
+            }
+            return result;
         }
 
         public async Task<PaginatedResult<List<ProductDto>>> GetAll(ListProductRequest pRequest)

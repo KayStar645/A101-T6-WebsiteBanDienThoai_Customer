@@ -72,7 +72,10 @@ namespace View.Controllers
             var result = await _productService.GetDetail(id);
             ViewData["product"] = result.Data;
 
-            var productsId = await _recommendService.Get(id);
+            var itemsets = await _recommendService.Get(id);
+            // Lấy ds sp tương ứng
+            var recommends = await _productService.GetProductForRecommend(itemsets, id);
+            ViewData["recommends"] = recommends;
 
             return PartialView("_ProductDetail");
         }

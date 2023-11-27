@@ -4,6 +4,6 @@ namespace Application.Interfaces.Services
 {
     public interface IRecommendPurchasingTogetherService
     {
-        Task<List<int>> Get(int pProductId);
+        Task<List<ItemsetResultDto>> Get(int pProductId);
     }
 }

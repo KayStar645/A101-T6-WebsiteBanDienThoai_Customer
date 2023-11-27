@@ -23,6 +23,13 @@ namespace View.Controllers
             return RedirectToAction("Cart", "Store");
         }
 
+        public async Task<IActionResult> AddRecommendsToCart(string pProductsId)
+        {
+            await _orderService.AddProductsToCart(pProductsId);
+
+            return RedirectToAction("Cart", "Store");
+        }
+
         public async Task<IActionResult> UpdateQuantityProductInCart(int pProductId, int pQuantity)
         {
             await _orderService.UpdateQuantityProductInCart(pProductId, pQuantity);

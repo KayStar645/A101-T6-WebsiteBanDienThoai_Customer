@@ -7,6 +7,8 @@ namespace Application.Interfaces.Services
     {
         Task AddProductToCart(int pProductId);
 
+        Task AddProductsToCart(string pProductsId);
+
         Task UpdateQuantityProductInCart(int pProductId, int pQuantity);
 
         Task<(List<DetailOrderDto> products, long sumPrice)> GetCart();

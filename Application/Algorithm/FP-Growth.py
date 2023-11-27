@@ -14,6 +14,9 @@ def run_fpgrowth(data, support, top_k):
     df = pd.DataFrame(te_ary, columns=te.columns_)
     frequent_itemsets = fpgrowth(df, min_support=support, use_colnames=True)
 
+    # Loại bỏ những tập mục đơn
+    frequent_itemsets = frequent_itemsets[frequent_itemsets['itemsets'].apply(lambda x: len(x) > 1)]
+
     # Sắp xếp theo sự xuất hiện và lấy top k
     frequent_itemsets = frequent_itemsets.sort_values(by='support', ascending=False).head(top_k)
 

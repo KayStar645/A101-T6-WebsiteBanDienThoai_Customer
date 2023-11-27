@@ -4,11 +4,84 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "ProductDetail";
     var product = ViewData["product"] as ProductDto;
+    var recommends = ViewData["recommends"] as List<(List<ProductDto> products, long sumOld, long sumNew)>;
 }
 
 <link href="~/css/product_detail.css" rel="stylesheet" />
 
 <style>
+
+    /* CSS */
+    .button-19 {
+        position: relative;
+        top: 25%;
+        left: 50%;
+        /* transform: translate(-50%, -50%); */
+        outline: none !important;
+        appearance: button;
+        background-color: #1899D6;
+        border: solid transparent;
+        border-radius: 16px;
+        border-width: 0 0 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: din-round,sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: .8px;
+        line-height: 20px;
+        margin: 0;
+        outline: none;
+        overflow: visible;
+        padding: 13px 16px;
+        text-align: center;
+        text-transform: uppercase;
+        touch-action: manipulation;
+        transform: translateZ(0);
+        transition: filter .2s;
+        user-select: none;
+        -webkit-user-select: none;
+        vertical-align: middle;
+        white-space: nowrap;
+        width: 70%;
+    }
+
+        .button-19:after {
+            background-clip: padding-box;
+            background-color: #1CB0F6;
+            border: solid transparent;
+            border-radius: 16px;
+            border-width: 0 0 4px;
+            bottom: -4px;
+            content: "";
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: -1;
+        }
+
+        .button-19:main,
+        .button-19:focus {
+            user-select: auto;
+        }
+
+        .button-19:hover:not(:disabled) {
+            filter: brightness(1.1);
+            -webkit-filter: brightness(1.1);
+        }
+
+        .button-19:disabled {
+            cursor: auto;
+        }
+
+        .button-19:active {
+            border-width: 4px 0 0;
+            background: none;
+        }
+
     .comment__list {
         height: auto;
         max-height: 400px;
@@ -130,7 +203,73 @@
 <div id="support" style="padding-bottom: 120px;">
     <div class="grid wide">
         <div class="suggest-product">
-            <h2 class="title">Phụ kiện nên có cho @(product.Name)</h2>
+            <h2 class="title">Sản phẩm thường được mua kèm với @(product.Name)</h2>
+            <div class="product__list">
+                <div id="suggest-list" class="carousel slide relative" data-interval="false">
+                    <div class="carousel-item">
+                        @if(recommends != null)
+                        {
+                            @foreach (var item in recommends)
+                            {
+                                <div class="row">
+                                    <div class="h-3">
+                                        <p class="product__info relative">
+                                            <div class=" product__info--new relative row flex-column ali-center">
+                                                <img src="@product.Images.FirstOrDefault()" />
+                                                <p class="product__name">@product.Name @product.Capacity?.Name - @product.Color?.Name</p>
+                                                @if (product.Promotion != null)
+                                                {
+                                                    <p class="product__price" style="text-decoration: line-through; font-weight: 500">
+                                                        @($"{product.Price:N0} đ")
+                                                    </p>
+                                                }
+                                                <p class="product__price">@($"{product.NewPrice:N0} đ")</p>
+                                            </div>
+                                        </p>
+                                    </div>
+
+                                    <i class="fa-solid fa-plus fa-2xl" style="position: relative;transform: translateY(180px);font-size: 40px;"></i>
+
+                                    @foreach(var p in item.products)
+                                    {
+                                        <div class="h-3">
+                                            <div data-id="@p.Id" class="product__info relative recommends">
+                                                <div class=" product__info--new relative row flex-column ali-center">
+                                                    <img src="@p.Images.FirstOrDefault()" />
+                                                    <p class="product__name">@p.Name @p.Capacity?.Name - @p.Color?.Name</p>
+                                                    @if (p.Promotion != null)
+                                                    {
+                                                        <p class="product__price" style="text-decoration: line-through; font-weight: 500">
+                                                            @($"{p.Price:N0} đ")
+                                                        </p>
+                                                    }
+                                                    <p class="product__price">@($"{p.NewPrice:N0} đ")</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="h-3">
+                                        <div style="left: 32%;position: relative;top: 20%;">
+                                            @if (item.sumOld + product.Price != item.sumNew + product.NewPrice)
+                                            {
+                                                <p class="product__price" style="text-decoration: line-through; font-weight: 500;font-size: 20px;">
+                                                    @($"{item.sumOld + product.Price:N0} đ")
+                                                </p>
+                                            }
+                                            <p class="product__price" style="font-size: 22px;">@($"{item.sumNew + product.NewPrice:N0} đ")</p>
+                                        </div>
+                                        <div data-id="@string.Join(",", item.products.Select(x => x.Id).Append(product.Id))"
+                                                class="button-19 buys" role="button">
+                                            Mua ngay
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="forsure" style="padding-top: 40px;">
@@ -177,6 +316,25 @@
     var productStorages = $(".product__storage");
     var inputs = $("#user__form input[type='text']");
     var toggleCollapses = $(".toggle");
+    var recommends = $(".product__info.recommends");
+    var buyRecommends = $(".button-19.buys");
+
+    Array.from(buyRecommends).forEach(buy => {
+        buy.addEventListener("click", e => {
+            var ids = e.target.dataset.id;
+
+            window.location.href = "/Order/AddRecommendsToCart?pProductsId=" + ids;
+        });
+    });
+
+    Array.from(recommends).forEach(recommend => {
+        recommend.addEventListener("click", e => {
+            const parent = getParentElement(e.target, '.product__info.recommends');
+            var id = parent.dataset.id;
+
+            window.location.href = "/Store/ProductDetail?id=" + id;
+        });
+    });
 
     Array.from(toggleCollapses).forEach(toggleCollapse => {
         toggleCollapse.addEventListener("click", e => {
