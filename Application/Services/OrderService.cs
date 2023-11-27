@@ -156,6 +156,58 @@ namespace Application.Services
             _httpContext.HttpContext.Response.Cookies.Append("products", productsJson, cookieOptions);
         }
 
+        public async Task AddProductsToCart(string pProductsId)
+        {
+            var list = await GetCart();
+            List<DetailOrderDto> productsList = new List<DetailOrderDto>();
+
+            string[] ids = pProductsId.Split(",");
+            foreach (string id in ids)
+            {
+                if (list.products.Any(x => x.ProductId == int.Parse(id)))
+                {
+                    continue;
+                }
+
+                var product = await _productRepo.Query()
+                            .Include(x => x.Capacity)
+                            .Include(x => x.Color)
+                            .FirstOrDefaultAsync(x => x.Id == int.Parse(id));
+
+                var mapProduct = _mapper.Map<ProductDto>(product);
+                // Lấy tất cả CTKM đang áp dụng cho sp này và chọn cái giảm giá cao nhất
+                var result = await _promotionService.ApplyPromotionForProduct(mapProduct.Id);
+
+                var detailOrder = new DetailOrderDto
+                {
+                    Product = mapProduct,
+                    ProductId = int.Parse(id),
+                    DiscountPrice = result.newPrice - result.oldPrice,
+                    Price = result.oldPrice,
+                    SumPrice = result.newPrice * 1,
+                    Quantity = 1,
+                };
+
+
+                var productsCookie = _httpContext.HttpContext.Request.Cookies["products"];
+
+                if (string.IsNullOrEmpty(productsCookie) == false)
+                {
+                    productsList = JsonConvert.DeserializeObject<List<DetailOrderDto>>(productsCookie);
+                }
+
+                productsList.Add(detailOrder);
+            }    
+
+            var productsJson = JsonConvert.SerializeObject(productsList);
+
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(7),
+            };
+            _httpContext.HttpContext.Response.Cookies.Append("products", productsJson, cookieOptions);
+        }
+
         public async Task UpdateQuantityProductInCart(int pProductId, int pQuantity)
         {
             var list = await GetCart();

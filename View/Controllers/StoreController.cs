@@ -9,13 +9,15 @@ namespace View.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IOrderService _orderService;
+        private readonly IRecommendPurchasingTogetherService _recommendService;
 
         public StoreController(IProductService productService, ICategoryService categoryService, 
-            IOrderService orderService)
+            IOrderService orderService, IRecommendPurchasingTogetherService recommendService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _orderService = orderService;
+            _recommendService = recommendService;
         }
 
         public async Task<IActionResult> Index()
@@ -69,6 +71,11 @@ namespace View.Controllers
 
             var result = await _productService.GetDetail(id);
             ViewData["product"] = result.Data;
+
+            var itemsets = await _recommendService.Get(id);
+            // Lấy ds sp tương ứng
+            var recommends = await _productService.GetProductForRecommend(itemsets, id);
+            ViewData["recommends"] = recommends;
 
             return PartialView("_ProductDetail");
         }
