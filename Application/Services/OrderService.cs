@@ -126,7 +126,7 @@ namespace Application.Services
             {
                 Product = mapProduct,
                 ProductId = pProductId,
-                DiscountPrice = result.newPrice - result.oldPrice,
+                DiscountPrice = result.oldPrice - result.newPrice,
                 Price = result.oldPrice,
                 SumPrice = result.newPrice * 1,
                 Quantity = 1,
@@ -182,7 +182,7 @@ namespace Application.Services
                 {
                     Product = mapProduct,
                     ProductId = int.Parse(id),
-                    DiscountPrice = result.newPrice - result.oldPrice,
+                    DiscountPrice = result.oldPrice - result.newPrice,
                     Price = result.oldPrice,
                     SumPrice = result.newPrice * 1,
                     Quantity = 1,

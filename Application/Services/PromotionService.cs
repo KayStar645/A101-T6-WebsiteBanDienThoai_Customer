@@ -56,8 +56,8 @@ namespace Application.Services
                                                              (long)(promotion.Percent * product.Price * 0.01);
                     if (discountMax < discount)
                     {
-                        newPrice = (long)(product.Price - discountMax);
                         discountMax = (long)discount;
+                        newPrice = (long)(product.Price - discountMax);
                         applyPromotion = promotion;
                     }
                 }
