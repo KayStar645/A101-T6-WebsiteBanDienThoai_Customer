@@ -75,14 +75,7 @@ namespace Application.Services
                         // Cập nhật giá lại cho đơn hàng
                         sumPrice[0] += detailOrder.Price * detailOrder.Quantity;
                         sumPrice[1] += detailOrder.DiscountPrice;
-                        sumPrice[2] += detailOrder.SumPrice;
-
-                        // Giảm số lượng sản phẩm: làm việc với DB ProductRepo
-                        var flag = await _productRepo.ReduceNumberAsync(detailOrder.ProductId, detailOrder.Quantity);
-                        if(flag == false)
-                        {
-                            transaction.Dispose();
-                        }    
+                        sumPrice[2] += detailOrder.SumPrice;    
 
                         detailOrder.OrderId = resultOrder.Id;
                         var detail = _mapper.Map<DetailOrder>(detailOrder);
