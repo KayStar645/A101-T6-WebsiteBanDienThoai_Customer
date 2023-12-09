@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Services;
+using Domain.DTOs;
 using Domain.Requests.Products;
 using Microsoft.AspNetCore.Mvc;
 
@@ -109,10 +110,21 @@ namespace View.Controllers
             return PartialView("_Cart");
         }
 
-        public async Task<IActionResult> Order()
+        [HttpGet]
+        public async Task<IActionResult> Order(string? pInternalCode = "")
         {
             var categoriesResult = await _categoryService.GetAll();
             ViewData["categories"] = categoriesResult.Data;
+
+            var result = await _orderService.GetOrderByInternalCode(pInternalCode);
+
+            ViewData["order"] = result.order;
+            ViewData["customer"] = result.customer;
+            ViewData["details"] = result.details;
+            if(result.order != null)
+            {
+                ViewData["type"] = Domain.Entities.Order.GetTypeMapping(result.order.Type).FirstOrDefault().typename;
+            }    
 
             return PartialView("_Order");
         }

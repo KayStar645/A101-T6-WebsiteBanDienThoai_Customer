@@ -237,5 +237,22 @@ namespace Application.Services
             return (products, sumPrice);
         }
 
+        public async Task<(OrderDto order, CustomerDto customer, List<DetailOrderDto> details)> GetOrderByInternalCode(string pInternalCode)
+        {
+            try
+            {
+                var result = await _orderRepo.GetOrderByInternalCode(pInternalCode);
+                var orderDto = _mapper.Map<OrderDto>(result.order);
+                var customerDto = _mapper.Map<CustomerDto>(result.customer);
+                var detailsDto = _mapper.Map<List<DetailOrderDto>>(result.details);
+
+                return (orderDto, customerDto, detailsDto);
+            }
+            catch
+            {
+                return (null, null, null);
+            }
+        }
+
     }
 }

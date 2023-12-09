@@ -9,5 +9,7 @@ namespace Application.Interfaces.Repositories
         Task<string> RangeInternalCode();
 
         Task<List<TransactionDto>> GetTransactions(int pProductId);
+
+        Task<(Order order, Customer customer, List<DetailOrder> details)> GetOrderByInternalCode(string pInternalCode);
     }
 }

@@ -7,12 +7,10 @@ namespace View.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly ICategoryService _categoryService;
         private readonly IOrderService _orderService;
 
-        public OrderController(ICategoryService categoryService, IOrderService orderService)
+        public OrderController(IOrderService orderService)
         {
-            _categoryService = categoryService;
             _orderService = orderService;
         }
 

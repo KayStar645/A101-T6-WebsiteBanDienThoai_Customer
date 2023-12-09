@@ -14,5 +14,7 @@ namespace Application.Interfaces.Services
         Task<(List<DetailOrderDto> products, long sumPrice)> GetCart();
 
         Task Create(CreateOrderRequest pRequest);
+
+        Task<(OrderDto order, CustomerDto customer, List<DetailOrderDto> details)> GetOrderByInternalCode(string pInternalCode);
     }
 }

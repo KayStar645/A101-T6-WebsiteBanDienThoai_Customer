@@ -51,5 +51,16 @@ namespace Infrastructure.Repositories
 
             return transactions;
         }
+
+        public async Task<(Order order, Customer customer, List<DetailOrder> details)> GetOrderByInternalCode(string pInternalCode)
+        {
+            var order = await _context.Order.FirstOrDefaultAsync(x => x.InternalCode == pInternalCode);
+            var customer = await _context.Customer.FirstOrDefaultAsync(x => x.Id == order.CustomerId);
+            var details = await _context.DetailOrder.Where(x => x.OrderId == order.Id)
+                                                    .Include(x => x.Product).ThenInclude(x => x.Capacity)
+                                                    .Include(x => x.Product).ThenInclude(x => x.Color)
+                                                    .ToListAsync();
+            return (order, customer, details);
+        }
     }
 }
