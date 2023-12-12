@@ -14,7 +14,7 @@ namespace Infrastructure
             .Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<SmartPhoneDbContext>();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("SubscribeTopicConnectionString"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("SmartPhoneConnectionString"));
 
             return new SmartPhoneDbContext(optionsBuilder.Options);
         }
